@@ -1,58 +1,87 @@
+import google.generativeai as genai
+import json
 import os
-import shutil
-from datetime import datetime
+from datetime import datetime, timedelta
+import firebase_admin
+from firebase_admin import credentials
 
-# Define las categorías para cada día de la semana (Lunes=0, Martes=1, etc.)
+# --- CONFIGURACIÓN ---
+# Configuración de la API de Gemini
+api_key = os.environ.get("GEMINI_API_KEY")
+genai.configure(api_key=api_key)
+
+# El modelo de IA que usaremos (¡AQUÍ ESTÁ LA CORRECCIÓN!)
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
+
+# Configuración de Firebase (si la usas para algo en este script)
+# creds_json = os.environ.get("FIREBASE_CREDS")
+# creds_dict = json.loads(creds_json)
+# cred = credentials.Certificate(creds_dict)
+# firebase_admin.initialize_app(cred)
+
 HORARIO = {
-    0: "logica_deductiva",
-    1: "laboratorio_virtual",
-    2: "criptoaritmetica",
-    3: "secuencia_logica",
-    4: "logica_lateral"
+    0: "lógica deductiva", 
+    1: "laboratorio virtual de trasvases", 
+    2: "criptoaritmética", 
+    3: "secuencia lógica para cruzar un río", 
+    4: "lógica lateral"
 }
 
-def publicar_reto_diario():
+def generar_un_reto(categoria, ruta_guardado):
+    """Genera un único reto y lo guarda en la ruta especificada."""
+    print(f"Generando para: {categoria}...")
+    # Prompt ajustado para pedir una estructura más completa
+    prompt = f"""
+    Crea un reto original de '{categoria}'.
+    Devuelve EXCLUSIVAMENTE un objeto JSON válido con la siguiente estructura:
+    {{
+      "titulo": "Un título corto y atractivo para el reto",
+      "categoria": "{categoria}",
+      "enunciado": "La descripción completa y detallada del problema a resolver. Usa saltos de línea con \\n si es necesario.",
+      "objetivo": "Una frase clara que describa lo que el usuario debe conseguir. Por ejemplo: 'Encuentra el valor de cada letra.' o 'Determina el orden correcto para cruzar el río.'",
+      "elementos_interactivos": {{
+        "tipo": "texto_libre",
+        "placeholder": "Escribe tu respuesta aquí..."
+      }},
+      "solucion": "La respuesta correcta y una breve explicación del razonamiento para llegar a ella."
+    }}
     """
-    Coge un reto del almacén, lo publica como reto.json y lo mueve al histórico.
-    """
-    # 1. Averiguar qué día es y qué categoría toca
-    hoy = datetime.now()
-    dia_semana = hoy.weekday() # Lunes es 0, Martes 1...
-
-    # Si es fin de semana, no hace nada
-    if dia_semana not in HORARIO:
-        print(f"Hoy es fin de semana ({dia_semana}). No se publica nada.")
-        return
-
-    nombre_categoria = HORARIO[dia_semana]
-    ruta_categoria = os.path.join("almacen_retos", nombre_categoria)
-    print(f"Hoy es {dia_semana}, toca la categoría: {nombre_categoria}")
-
-    # 2. Comprobar si quedan retos en el almacén para esa categoría
-    if not os.path.exists(ruta_categoria) or not os.listdir(ruta_categoria):
-        print(f"⚠️ ¡Alerta! No quedan retos en el almacén para la categoría '{nombre_categoria}'.")
-        # Aquí podrías añadir una notificación por email si quisieras
-        return
-
-    # 3. Coger el primer reto disponible
-    retos_disponibles = sorted(os.listdir(ruta_categoria))
-    nombre_reto_a_publicar = retos_disponibles[0]
-    ruta_origen = os.path.join(ruta_categoria, nombre_reto_a_publicar)
     
-    # 4. Copiarlo a la raíz como "reto.json"
-    ruta_destino_publico = "reto.json"
-    shutil.copy(ruta_origen, ruta_destino_publico)
-    print(f"✅ Reto '{nombre_reto_a_publicar}' copiado a '{ruta_destino_publico}'.")
+    try:
+        response = model.generate_content(prompt)
+        # Limpieza robusta del texto para asegurar que sea un JSON válido
+        cleaned_text = response.text.strip().replace("```json", "").replace("```", "")
+        reto_json = json.loads(cleaned_text)
+        
+        # Crear directorio si no existe
+        os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
+        
+        with open(ruta_guardado, "w", encoding="utf-8") as f:
+            json.dump(reto_json, f, ensure_ascii=False, indent=2)
+        print(f"✅ Reto para '{categoria}' guardado en {ruta_guardado}")
+        return True
+    except Exception as e:
+        print(f"❌ ERROR en '{categoria}': {e}")
+        return False
 
-    # 5. Mover el reto usado a un archivo histórico con la fecha de hoy
-    # Esto evita que se vuelva a usar y sirve de registro
-    os.makedirs("retos_publicados", exist_ok=True)
-    fecha_hoy_str = hoy.strftime('%Y-%m-%d')
-    ruta_historico = os.path.join("retos_publicados", f"{fecha_hoy_str}.json")
-    shutil.move(ruta_origen, ruta_historico)
-    print(f"✅ Reto movido a '{ruta_historico}'.")
+def modo_lote():
+    """Modo para generar múltiples retos y guardarlos en el almacén."""
+    print("Iniciando generación de lote...")
+    count = int(os.environ.get('COUNT_PER_CATEGORY', 5))
+    
+    for categoria_nombre in HORARIO.values():
+        nombre_carpeta = categoria_nombre.replace(" ", "_").lower()
+        
+        for i in range(1, count + 1):
+            ruta = f"almacen_retos/{nombre_carpeta}/reto_{i}.json"
+            generar_un_reto(categoria_nombre, ruta)
+            
+    print("🎉 Proceso finalizado.")
 
 if __name__ == "__main__":
-    print("Iniciando script de publicación...")
-    publicar_reto_diario()
-    print("Script de publicación finalizado.")
+    mode = os.environ.get('GENERATION_MODE')
+
+    if mode == 'bulk':
+        modo_lote()
+    else:
+        print("Modo no especificado. El script debe ejecutarse en modo 'bulk'.")
