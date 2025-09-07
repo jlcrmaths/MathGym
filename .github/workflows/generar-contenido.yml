@@ -29,7 +29,7 @@ jobs:
           if not GEMINI_API_KEY:
               raise ValueError("API Key de Gemini no encontrada.")
           genai.configure(api_key=GEMINI_API_KEY)
-          model = genai.GenerativeModel('gemini-pro')
+          model = genai.GenerativeModel('gemini-1.0-pro')
 
           CATEGORIAS = ["lógica deductiva", "laboratorio virtual de trasvases", "criptoaritmética", "secuencia lógica para cruzar un río", "lógica lateral"]
 
