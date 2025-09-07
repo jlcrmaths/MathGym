@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de las Piedras Preciosas",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un joyero ha codificado el precio de sus piedras preciosas utilizando letras.  Cada letra representa un dígito diferente del 0 al 9.  Descubre el valor de cada letra para resolver el enigma:\n\nRUBÍ + ZAFIRO = ESMERALDA\n\nConsidera las siguientes pistas:\n\n* R y Z son números pares.\n* La letra A es igual a 1.\n* El valor de la suma de la columna de las unidades (I + O) termina en A (1).\n* El valor de ESMERALDA es mayor que 20000 y menor que 30000.",
+  "objetivo": "Encuentra el valor numérico de cada letra (R, U, B, Í, Z, A, F, I, R, O, E, S, M, L, D).",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí (ej: R=2, U=3, B=4...etc)"
+  },
+  "solucion": "La solución es: R=8, U=7, B=6, Í=0, Z=2, A=1, F=9, I=5, O=6, E=3, S=4, M=2, L=0, D=7.  Por lo tanto, la ecuación se resuelve así: 8760 + 21950 = 30710.  La pista de que A=1 y que la suma de las unidades termina en 1 es crucial para empezar.  Las demás restricciones ayudan a reducir las posibilidades hasta encontrar la única solución válida."
+}

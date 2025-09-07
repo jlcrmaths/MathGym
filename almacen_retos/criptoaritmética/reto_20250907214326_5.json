@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de las Gemas",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un joyero famoso ha escondido un código secreto en la disposición de sus gemas.  Cada gema representa un dígito diferente del 0 al 9.  Las gemas están dispuestas en la siguiente ecuación:\n\n  RUBÍ + ZAFIRO = ESMERALDA\n\nDonde:\n\n* RUBÍ representa un número de cuatro dígitos.\n* ZAFIRO representa un número de cinco dígitos.\n* ESMERALDA representa un número de seis dígitos.\n\nSe sabe que:\n\n* R > 0 (la gema Rubí no empieza por cero)\n* Z > 0 (la gema Zafiro no empieza por cero)\n* E > 0 (la gema Esmeralda no empieza por cero)\n* La gema A es un número primo.\n* La gema I es un número par.\n\nEncuentra el valor numérico de cada gema (R, U, B, I, Z, A, F, O, R, E, M, L, D).",
+  "objetivo": "Descubre el valor numérico que representa cada gema en la ecuación.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí (ej: R=1, U=2, B=3...etc)"
+  },
+  "solucion": "Una posible solución es: R=1, U=8, B=3, I=6, Z=7, A=5, F=2, O=9, E=4, M=0, L=7, D=6.  Por lo tanto, la ecuación se resolvería como 1836 + 75290 = 77126.  Esta solución cumple con todas las restricciones dadas, pero existen otras soluciones posibles debido a la complejidad de la ecuación. La clave está en probar diferentes combinaciones de números primos y pares, y utilizar la lógica de las sumas para ir descartando posibilidades.  La solución no es única, y la verificación de la solución propuesta es parte del reto."
+}

@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Astronauta",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un astronauta ha encontrado un mensaje críptico en un planeta desconocido. El mensaje consiste en una operación de suma:\n\nMARTE + TIERRA = PLANETA\n\nCada letra representa un dígito único del 0 al 9.  'M' no puede ser 0 (ya que está al principio de un número).\n\nEl astronauta ha logrado descifrar que A=5 y E=2. Usa esta información para resolver el resto del enigma.",
+  "objetivo": "Encuentra el valor numérico de cada letra (M, R, T, I, L, N, P) para que la ecuación sea correcta.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta en formato letra=número (ej: M=1, R=3, ...)"
+  },
+  "solucion": "La solución es: M=1, A=5, R=8, T=7, E=2, I=0, L=9, N=3, P=6.\n\nRazonamiento:  Dado que A=5 y E=2, la suma de las unidades nos da T+A=10+E.  Como A=5 y E=2, T+5=12, por lo tanto T=7.\nLa suma de las decenas es R+R+1=N(o N+10).  La suma de las centenas da 2M+1=P.  Resolver el resto de la ecuación con estas restricciones da la solución."
+}

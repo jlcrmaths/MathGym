@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista,  Zenón, ha dejado un mensaje cifrado en su laboratorio.  Tiene tres frascos: A, B y C.  El frasco A contiene 8 unidades de un líquido misterioso, el frasco B contiene 5 unidades y el frasco C está vacío. Zenón solo dispone de dos herramientas: una jarra de 3 unidades y otra de 7 unidades. \n\nSu mensaje secreto se desbloqueará cuando el frasco A contenga exactamente 4 unidades, el frasco B contenga 1 unidad, y el frasco C contenga 8 unidades.  \n\nDescribe la secuencia de trasvases necesarios, indicando en cada paso qué frasco se está usando y cuántas unidades se traspasan a qué otro frasco.  Usa la nomenclatura 'X -> Y (Z)'  para representar 'traspasar Z unidades del frasco X al frasco Y'.  Por ejemplo, 'A -> C (3)' significa traspasar 3 unidades del frasco A al frasco C.",
+  "objetivo": "Determina la secuencia de trasvases para obtener 4 unidades en el frasco A, 1 unidad en el frasco B, y 8 unidades en el frasco C.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia de trasvases aquí (ej: A -> C (3), B -> A (2)... )"
+  },
+  "solucion": "Una posible solución es:\n1. A -> C (3)\n2. B -> A (5)\n3. A -> B (2)\n4. C -> B (7) \n5. A -> C (2)\n6. B -> A (1) \n\nEsto resulta en: A = 4, B = 1, C = 8.  Existen otras secuencias posibles, pero todas deben llegar a la misma distribución final en los frascos para resolver el enigma."
+}

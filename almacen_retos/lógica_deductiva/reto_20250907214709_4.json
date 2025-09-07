@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de la Galería",
+  "categoria": "lógica deductiva",
+  "enunciado": "Cinco artistas (Ana, Bruno, Carlos, Diana y Elena) expusieron sus obras en una galería. Cada uno expuso una sola obra, y cada obra es de un estilo diferente: Abstracto, Barroco, Cubista, Impresionista y Surrealista.  Se sabe lo siguiente:\n\n1. La obra de Ana no es Abstracta ni Barroca.\n2. La obra Cubista fue expuesta antes que la obra de Bruno.\n3. La obra de Carlos es Impresionista.\n4. La obra Surrealista fue expuesta después de la obra de Diana.\n5. La obra de Elena no es Abstracta.\n6. Ni la obra de Ana ni la obra de Bruno son Surrealistas.\n7. La obra Barroca fue expuesta antes que la obra Abstracta.\n\nLas obras se expusieron en orden de llegada a la galería: primera, segunda, tercera, cuarta y quinta.",
+  "objetivo": "Determina el orden de exposición de las obras y el estilo de cada una.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe el orden de las obras y su estilo (ej: 1. Ana-Barroco, 2. Bruno-Cubista...)"
+  },
+  "solucion": "La solución se obtiene mediante razonamiento deductivo.  Siguiendo las pistas:\n\n1. Sabemos que Carlos es Impresionista (3).\n2. Ana no es Abstracta ni Barroca (1), ni Surrealista (6).\n3. Bruno no es Surrealista (6), y su obra está después de la Cubista (2).\n4. Diana está antes que la Surrealista (4).\n5. Elena no es Abstracta (5).\n6. La Barroca está antes que la Abstracta (7).\n\nPor eliminación, la única opción posible es:\n\n1. Diana - Barroca\n2. Bruno - Cubista\n3. Ana - Surrealista\n4. Elena - Abstracta\n5. Carlos - Impresionista\n\nEl razonamiento se basa en la eliminación sistemática de posibilidades hasta llegar a una única solución consistente con todas las premisas."
+}

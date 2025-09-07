@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Relojero",
+  "categoria": "lógica lateral",
+  "enunciado": "Un famoso relojero, conocido por su extravagancia, ha dejado una nota críptica antes de desaparecer misteriosamente. La nota dice:\n\n\"La clave está en el tic-tac.  Tres son uno, uno es ninguno, dos son cuatro, y cuatro son dos.  Encuentra mi escondite usando las manecillas del reloj.\"\n\nSabemos que el relojero utilizaba un reloj de agujas tradicional de 12 horas.  Ninguna otra información adicional se conoce sobre la nota ni sobre el relojero.",
+  "objetivo": "Determina la hora y el lugar donde se esconde el relojero, usando únicamente la información de la nota.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la hora y el lugar (ej: '3:00, en la caja fuerte')"
+  },
+  "solucion": "La solución es 8:20, en el cajón del escritorio.\n\nRazonamiento: La clave está en la interpretación de la frase \"Tres son uno, uno es ninguno, dos son cuatro, y cuatro son dos\".  Si interpretamos esto como un problema de  posiciones de las agujas, podemos entender que: \n\n* Tres (horas) es uno (solo una vez en 12 horas se superponen las manecillas a la tercera hora): 3:16 aproximadamente\n* Uno (hora) es ninguno (no se superponen las manecillas de ninguna forma): No es útil\n* Dos (horas) son cuatro (hay dos ocasiones de superposición de agujas en 4 horas): Podría ser 4:22 aproximadamente, 8:22 aproximadamente, etc.\n* Cuatro (horas) son dos (hay dos ocasiones de superposición de agujas en 8 horas): Podría ser 8:22 aproximadamente, 10:22 aproximadamente, etc.\n\nCombinando las pistas, observamos que 8:20 (u hora similar) satisface ambas condiciones (dos horas son cuatro y cuatro horas son dos).  Se sugiere el cajón del escritorio como una posibilidad lógica, dada la discreción que el acertijo propone."
+}

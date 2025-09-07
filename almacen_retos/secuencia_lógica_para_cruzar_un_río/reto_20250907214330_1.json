@@ -1,0 +1,11 @@
+{
+  "titulo": "El Río de los Acertijos",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Un grupo de aventureros debe cruzar un río utilizando una balsa que solo soporta un máximo de 150 kg.  Los aventureros y sus pesos son:\n\n* Ana (50 kg)\n* Bruno (75 kg)\n* Carlos (100 kg)\n* Diana (25 kg)\n\nEl río tiene una corriente muy fuerte, por lo que solo una persona puede remar a la vez.  Si solo Ana puede remar la balsa, ¿cuál es la secuencia de cruces que permite a todos cruzar el río de forma segura y eficiente (utilizando el menor número de viajes)?  Describe cada viaje indicando quién cruza y quién regresa.\n\n**Restricciones:**\n* La balsa no puede estar sobrecargada.\n* Solo Ana puede remar.\n* La balsa debe regresar siempre con al menos una persona.",
+  "objetivo": "Determina la secuencia óptima de cruces para que todos los aventureros atraviesen el río.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia de cruces aquí (ej: Ana cruza, Ana regresa, Bruno cruza...).  Indica quién cruza y quién regresa en cada viaje."
+  },
+  "solucion": "La solución óptima requiere 7 viajes:\n\n1. Ana cruza.\n2. Ana regresa.\n3. Bruno cruza.\n4. Diana cruza.\n5. Ana regresa.\n6. Ana y Diana cruzan.\n7. Ana regresa. \n\nEsta secuencia asegura que la balsa nunca está sobrecargada y que todos los aventureros cruzan el río de forma segura.  Se prioriza el envío de los más pesados en el menor número de viajes para optimizar la solución."
+}

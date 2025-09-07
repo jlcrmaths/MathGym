@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj Detenido",
+  "categoria": "lógica lateral",
+  "enunciado": "Un detective llega a una escena del crimen. En el suelo, yace el cuerpo de la víctima.  Cerca, hay un reloj de pared que marca las 3:17. El detective sabe que el reloj se detuvo en el momento exacto del asesinato. Sin embargo, el relojero, tras examinar el reloj, declara que el reloj se detuvo hace exactamente 24 horas.  \n\nEl detective, examinando el cuerpo, constata que no hay signos de lucha, ni heridas visibles. Se sabe que la víctima tenía una vida tranquila, sin enemigos conocidos. El único indicio inusual es una nota escrita en una pequeña libreta a su lado: \"El tiempo es circular, pero el final, siempre lineal.\"\n\nEl detective ha revisado todas las cámaras de seguridad cercanas, y ninguna registró nada inusual ese día.\n\n¿Cómo descubrió el detective la hora exacta del asesinato?",
+  "objetivo": "Determina la hora exacta del asesinato según la información proporcionada.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la hora exacta del asesinato..."
+  },
+  "solucion": "La hora exacta del asesinato fue las 3:17 del día anterior. El relojero indicó que el reloj estaba parado desde hacía 24 horas. Como el reloj marcaba las 3:17, se deduce que se detuvo a esa hora 24 horas antes."
+}

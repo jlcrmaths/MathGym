@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj Estelar",
+  "categoria": "criptoaritmética",
+  "enunciado": "En un lejano planeta, el tiempo se mide con un reloj estelar que utiliza un sistema numérico basado en letras.  Las siguientes ecuaciones representan sumas realizadas con este reloj:\n\n  ESTRELLA + ESTRELLA =  GALAXIA\n\nCada letra representa un dígito único del 0 al 9.  'A' no puede ser 0.\n\nConsidera que las operaciones se realizan como sumas aritméticas normales, sin llevarse.",
+  "objetivo": "Descubre el valor numérico de cada letra en el sistema del reloj estelar.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe el valor de cada letra (ej: A=1, E=2, ...)"
+  },
+  "solucion": "La solución es: A=1, E=5, G=1, L=0, R=7, S=2, T=8, X=3, I=6.\n\nRazonamiento:  El problema se puede resolver mediante un proceso de eliminación y prueba. Comenzando con la columna de las unidades, se deduce que 2A = 1A (debido a que no hay acarreo).  Por tanto, A debe ser 1.  De ahí, se puede deducir el valor de E, luego de S y T para resolver el resto de incógnitas con lógica."
+}

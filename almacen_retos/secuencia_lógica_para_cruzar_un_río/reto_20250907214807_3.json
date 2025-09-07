@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Río Encantado",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Un río mágico separa dos orillas. Para cruzarlo, debes seguir una secuencia precisa de acciones, representadas por símbolos.  Solo un orden específico permitirá el paso.  Tienes disponibles los siguientes elementos:\n\n* Un Anillo de Oro (A)\n* Una Pluma de Fénix (P)\n* Una Piedra Lunar (L)\n* Un Cáliz de Plata (C)\n\nCada elemento debe ser usado una sola vez y en el orden correcto.  Se te presenta una serie de intentos fallidos, que te ayudarán a deducir la secuencia:\n\n* Intento 1:  A-P-L-C  (Fallo: El río se convierte en lava)\n* Intento 2:  L-C-A-P  (Fallo: Aparecen serpientes venenosas)\n* Intento 3:  P-A-C-L  (Fallo: El río se congela)\n* Intento 4:  C-L-P-A (Fallo: El puente se derrumba)\n\nUtiliza la información de los intentos fallidos para determinar la secuencia correcta que te permitirá cruzar el río de forma segura.",
+  "objetivo": "Determina la secuencia correcta de elementos (A, P, L, C) para cruzar el río.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia correcta (ej: A-P-L-C)"
+  },
+  "solucion": "La solución es C-A-P-L.  Analizando los intentos fallidos, se puede deducir que cada elemento tiene una posición específica. El orden correcto se obtiene por eliminación y prueba y error basándose en los resultados de los intentos fallidos.  La secuencia errónea en cada intento provee pistas sobre la posición correcta de cada elemento."
+}

@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Astronauta",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un astronauta ha enviado un mensaje codificado desde Marte.  El mensaje contiene una simple ecuación, pero las cifras han sido reemplazadas por letras.  Descubre el valor numérico de cada letra para descifrar el mensaje.\n\nLa ecuación es: \n\nMARTE + TIERRA = PLANETA\n\nDonde cada letra representa un dígito único (0-9).  Ten en cuenta que la letra 'M' no puede ser 0, ya que es el primer dígito de 'MARTE'.",
+  "objetivo": "Encuentra el valor numérico de cada letra (M, A, R, T, E, I, L, P, N).",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí (ej: M=1, A=2, R=3, ...)"
+  },
+  "solucion": "La solución es: M=1, A=5, R=8, T=2, E=0, I=7, L=3, P=9, N=4.\n\nRazonamiento: Se puede deducir que M=1 (ya que es la suma de dos números de una cifra y el resultado es menor que 20).  A partir de ahí, se puede ir probando diferentes combinaciones hasta encontrar la única que satisface la ecuación.  El proceso implica un poco de prueba y error, pero una vez que se encuentra una solución, se puede verificar fácilmente."
+}

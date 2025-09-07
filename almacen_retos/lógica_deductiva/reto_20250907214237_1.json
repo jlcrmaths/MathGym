@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de las Flores",
+  "categoria": "lógica deductiva",
+  "enunciado": "Tres amigos, Ana, Ben y Carla, cada uno cultiva un tipo diferente de flor: rosas, tulipanes y margaritas.  Sabemos lo siguiente:\n\n1. Ana no cultiva rosas ni margaritas.\n2. Ben no cultiva rosas.\n3. Si Carla cultiva tulipanes, entonces Ben cultiva margaritas.\n\nDetermina qué tipo de flor cultiva cada amigo.",
+  "objetivo": "Descubre qué tipo de flor cultiva cada persona (Ana, Ben y Carla).",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta en el formato: Ana: [flor], Ben: [flor], Carla: [flor]"
+  },
+  "solucion": "Ana: Tulipanes, Ben: Margaritas, Carla: Rosas.\n\nRazonamiento:\nDe la afirmación 1, Ana cultiva tulipanes.  De la afirmación 2, Ben no cultiva rosas.  Como solo quedan margaritas, Ben cultiva margaritas.  Por eliminación, Carla cultiva rosas. La afirmación 3 es redundante en este caso, ya que es verdadera con la solución encontrada."
+}

@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma de la Poción Mágica",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "En nuestro laboratorio secreto, disponemos de tres frascos: A, B y C.  El frasco A contiene 8 litros de una solución púrpura, B contiene 5 litros de una solución verde y C está vacío.  Solo tenemos dos recipientes adicionales: uno de 3 litros y otro de 2 litros. \n\nNuestro objetivo es obtener exactamente 4 litros de la solución púrpura en el frasco C, utilizando únicamente trasvases entre los frascos A, B y los recipientes auxiliares.  No se puede medir directamente la cantidad de líquido; solo podemos verter hasta llenar completamente un frasco o recipiente, o vaciar completamente uno.\n\nDescriba la secuencia de trasvases necesarios para lograr el objetivo. Indique en cada paso qué frasco o recipiente se está llenando o vaciando y la cantidad transferida. Por ejemplo: 'Vaciar 2 litros de A en el recipiente de 2 litros'.",
+  "objetivo": "Obtener 4 litros de la solución púrpura en el frasco C.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe la secuencia de trasvases aquí..."
+  },
+  "solucion": "Una posible solución:\n\n1. Vaciar 3 litros de A al recipiente de 3 litros.\n2. Vaciar 2 litros del recipiente de 3 litros al recipiente de 2 litros.\n3. Vaciar los 2 litros del recipiente de 2 litros al frasco B.\n4. Vaciar 1 litro del recipiente de 3 litros al frasco B (B ahora tiene 7 litros).\n5. Llenar el recipiente de 2 litros con la solución púrpura de A (quedan 2 litros en A).\n6. Vaciar el recipiente de 2 litros en el frasco C.\n7. Vaciar los 2 litros restantes de A en el recipiente de 2 litros.\n8. Vaciar 2 litros del recipiente de 2 litros al frasco C (C ahora tiene 4 litros). \n\nExisten otras secuencias de trasvases posibles que también conducen a la solución."
+}

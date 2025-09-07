@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj",
+  "categoria": "lógica deductiva",
+  "enunciado": "Cuatro sospechosos - Ana, Bruno, Carlos y Diana - fueron vistos cerca del lugar donde se robó un reloj de oro.  Cada uno hizo una declaración a la policía:\n\n* **Ana:** \"Yo no robé el reloj. Bruno es el culpable.\"\n* **Bruno:** \"Yo soy inocente. Carlos robó el reloj.\"\n* **Carlos:** \"Yo no lo robé. Diana es la culpable.\"\n* **Diana:** \"Yo soy inocente. Ana está mintiendo.\"\n\nSabemos que solo una persona robó el reloj y que solo una de las declaraciones es completamente verdadera, mientras que las demás son completamente falsas (es decir, cada declaración es o totalmente verdadera o totalmente falsa).",
+  "objetivo": "Identifica al ladrón del reloj de oro.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe el nombre del ladrón aquí..."
+  },
+  "solucion": "El ladrón es Carlos.\n\nSi la declaración de Ana fuera verdadera, entonces la declaración de Bruno sería falsa (ya que afirma la inocencia de Bruno).  Si la declaración de Ana es verdadera, entonces las declaraciones de Carlos y Diana también serían falsas, lo cual es imposible ya que solo una declaración puede ser verdadera.\n\nPor lo tanto, la declaración de Ana es falsa. Esto significa que tanto Ana como Bruno son inocentes.\n\nSi la declaración de Carlos fuera verdadera, la declaración de Diana sería falsa.  Esto es posible, por lo que Carlos es el ladrón. Si Carlos es el ladrón, entonces la afirmación de Bruno de que Carlos lo robó es verdadera, lo cual viola la condición de que sólo una declaración es verdadera. Por lo tanto, la declaración de Carlos debe ser falsa. \n\nPor descarte y dado que solo puede haber un culpable y una declaración verdadera, la declaración verdadera es la de Bruno: él es inocente y Carlos es el culpable."
+}

@@ -1,0 +1,11 @@
+{
+  "titulo": "El Río de las Piedras Mágicas",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Debes cruzar un río utilizando únicamente tres piedras mágicas.  Cada piedra tiene una propiedad única:\n\n* **Piedra Roja:**  Permite cruzar el río a una persona, pero solo si hay al menos una persona ya en la otra orilla.\n* **Piedra Azul:** Permite cruzar el río a dos personas simultáneamente, pero solo si el río está en calma (sin viento). \n* **Piedra Verde:** Permite cruzar el río a una sola persona, siempre y cuando la persona lleve consigo una linterna.\n\nHay cuatro personas que necesitan cruzar: Ana, Bruno, Carla y David.  Solo una persona dispone de una linterna.  El río está en calma al inicio del reto, pero una fuerte ráfaga de viento llegará en breve, interrumpiendo el uso de la Piedra Azul. \n\n¿En qué orden deben usar las piedras mágicas para que las cuatro personas crucen el río antes de que llegue el viento, y sin que nadie se quede varado a mitad del camino?",
+  "objetivo": "Determina la secuencia correcta de uso de las piedras mágicas para que las cuatro personas crucen el río.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia de uso de las piedras (ej: Rojo, Azul, Verde...)"
+  },
+  "solucion": "La solución óptima es: \n\n1. **Verde:** David (con la linterna) cruza solo.\n2. **Roja:** David regresa.\n3. **Azul:** Ana y Bruno cruzan juntos.\n4. **Verde:** David regresa.\n5. **Verde:** David cruza solo.\n\nRazonamiento:  Se debe priorizar el uso de la Piedra Azul antes de que llegue el viento. El uso de la Piedra Roja es clave para permitir el cruce del que lleva la linterna.  La secuencia garantiza que todos crucen el río antes del viento y sin riesgos."
+}

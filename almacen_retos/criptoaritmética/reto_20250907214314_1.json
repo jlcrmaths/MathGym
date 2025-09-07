@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Relojero",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un famoso relojero dejó una nota críptica antes de desaparecer:  \n\n  RELOJ + RELOJ =  TIEMPO\n\nCada letra representa un dígito único del 0 al 9.  'RELOJ' y 'TIEMPO' son números enteros.  Descubre el valor de cada letra para resolver el enigma del relojero.",
+  "objetivo": "Encuentra el valor numérico de cada letra (R, E, L, O, J, T, I, M, P) en la ecuación.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí (ej: R=1, E=2, L=3...)"
+  },
+  "solucion": "La solución es: R=9, E=5, L=4, O=0, J=7, T=1, I=8, M=2, P=6. \n\nRazonamiento: Observando la suma, se puede deducir que 2J termina en 0, por lo que J debe ser 5 o 0. Dado que las letras representan dígitos únicos, J=5. Luego, 2J=10, por lo que se lleva 1 a la columna siguiente.  Continuando con este análisis, considerando las posibles combinaciones de dígitos y llevando las unidades, se puede llegar a la solución única mostrada."
+}

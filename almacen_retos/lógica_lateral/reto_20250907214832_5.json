@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj Detenido",
+  "categoria": "lógica lateral",
+  "enunciado": "Un detective llega a una escena del crimen.  Encuentra un reloj de pared parado, con las agujas apuntando a las 3:15.  No hay otros indicios visibles de cómo o cuándo ocurrió el crimen.  El dueño de la casa, un coleccionista de relojes, asegura que su reloj se detuvo exactamente en el momento en que ocurrió el asesinato.  Sin embargo, el detective sabe que el coleccionista miente. \n\n¿Cómo sabe el detective que el dueño de la casa está mintiendo, basándose únicamente en la información del reloj?",
+  "objetivo": "Explica por qué el detective sabe que el dueño de la casa está mintiendo.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí..."
+  },
+  "solucion": "El detective sabe que el dueño miente porque, si el reloj se hubiera parado exactamente en el momento del asesinato, las agujas estarían en una posición ligeramente diferente a las 3:15.  Cuando un reloj se detiene, las agujas no se detienen instantáneamente; siguen teniendo un pequeño impulso que las mueve ligeramente antes de quedar completamente inmóviles. La posición exacta de las agujas a las 3:15 es demasiado precisa para ser un reloj que se detuvo repentinamente durante un evento violento y caótico."
+}

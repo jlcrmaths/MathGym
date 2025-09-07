@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj",
+  "categoria": "lógica deductiva",
+  "enunciado": "Cuatro amigos, Ana, Ben, Carlos y Diana, tienen cada uno un reloj de diferente color: rojo, azul, verde y amarillo.  Se sabe lo siguiente:\n\n1. El reloj de Ana no es rojo ni verde.\n2. El reloj de Ben es de un color más oscuro que el de Carlos.\n3. El reloj de Diana es de un color más claro que el de Ana.\n4.  El reloj amarillo no es de Carlos ni de Diana.\n\nDetermina el color del reloj de cada persona.",
+  "objetivo": "Determina el color del reloj de cada persona (Ana, Ben, Carlos y Diana).",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta en formato: Ana: [color], Ben: [color], Carlos: [color], Diana: [color]"
+  },
+  "solucion": "Ana: Azul, Ben: Verde, Carlos: Rojo, Diana: Amarillo.\n\nRazonamiento:\nDe la pista 1, Ana no tiene rojo ni verde. De la pista 3, Diana tiene un reloj más claro que Ana, lo que implica que el reloj de Ana no puede ser amarillo (ya que amarillo es el más claro). Por lo tanto, Ana tiene un reloj azul.  La pista 4 indica que el reloj amarillo no es de Carlos ni Diana, por lo que Diana tiene el reloj amarillo. La pista 2 indica que el reloj de Ben es más oscuro que el de Carlos. Dado que Ana tiene el reloj azul y Diana el amarillo, Ben debe tener el verde y Carlos el rojo."
+}

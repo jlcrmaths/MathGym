@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de la Mezcla Mágica",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "En nuestro laboratorio, hemos descubierto tres frascos misteriosos, etiquetados A, B y C.  Cada frasco contiene una solución de un color diferente: rojo, azul y verde, pero no sabemos qué color corresponde a cada frasco. \n\nTenemos tres probetas vacías (P1, P2, P3) y un único instrumento para trasvases que permite verter todo el contenido de un frasco en una probeta.  Tras realizar los trasvases, observamos lo siguiente:\n\n* Trasvasar A a P1 resulta en una solución de color rojo.\n* Trasvasar B a P2 resulta en una solución de color verde.\n* Trasvasar C a P3 resulta en una solución de color azul. \n\nSin embargo, ¡hay una complicación! Sabemos que si mezclamos los contenidos de dos frascos, obtenemos un resultado diferente. Mezclar A y B da un color marrón, mezclar A y C da un color morado, y mezclar B y C da un color turquesa.\n\nTu misión es determinar qué color corresponde a cada frasco (A, B y C).",
+  "objetivo": "Determina el color de la solución contenida en cada frasco (A, B, C).",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta en el formato: A=color, B=color, C=color (ej: A=rojo, B=azul, C=verde)"
+  },
+  "solucion": "A=rojo, B=verde, C=azul. \n\nLa solución se deduce directamente de las observaciones individuales de cada frasco.  La información sobre las mezclas es redundante para resolver este reto específico."
+}

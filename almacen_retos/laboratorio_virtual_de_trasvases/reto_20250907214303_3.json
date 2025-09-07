@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio de la Mezcla Mágica",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "En nuestro laboratorio se ha producido un accidente! Tres líquidos mágicos, Rojo, Azul y Verde, se han mezclado en cantidades desconocidas dentro de tres frascos diferentes, A, B y C.  Sabemos lo siguiente:\n\n* El frasco A contiene una mezcla de Rojo y Azul.\n* El frasco B contiene una mezcla de Azul y Verde.\n* El frasco C contiene una mezcla de Rojo y Verde.\n\nTienes tres vasos de precipitados vacíos y acceso a tres pipetas capaces de extraer 10 ml, 5ml y 2 ml de cualquier frasco.  Tu objetivo es separar completamente los tres líquidos mágicos en recipientes individuales.  No puedes tirar nada, ni añadir ningún otro líquido.  Debes describir paso a paso la secuencia de trasvases necesarios para conseguirlo.  Indica en cada paso la cantidad de líquido que trasvasas de qué frasco a cuál, y qué contiene cada frasco al final de cada paso.  Considera que los líquidos se mezclan perfectamente al combinarlos.",
+  "objetivo": "Separar completamente los tres líquidos mágicos (Rojo, Azul y Verde) en recipientes individuales usando únicamente las pipetas y los pasos descritos.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe la secuencia de trasvases aquí..."
+  },
+  "solucion": "No existe una única solución, pero una posible secuencia de trasvases podría ser:\n\n1. Extraer 10ml de A y colocarlo en un vaso de precipitado.  Este vaso contiene una mezcla de Rojo y Azul.\n2. Extraer 5 ml de B y colocarlo en un segundo vaso de precipitado. Este vaso contiene una mezcla de Azul y Verde.\n3. Extraer 2 ml de C y colocarlo en un tercer vaso de precipitado. Este vaso contiene una mezcla de Rojo y Verde.\n4. (A partir de este punto las siguientes acciones dependerán de las proporciones de la mezcla inicial) Se deberá realizar un análisis cuidadoso de las cantidades extraídas para intentar aislar cada componente.  Este análisis debe basarse en la obtención de  pequeñas cantidades de cada líquido para crear otras mezclas que permitan la separación. (Se debe dar una explicación razonada, aunque no se pueda dar una solución exacta sin saber las proporciones iniciales)."
+}

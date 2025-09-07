@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Río Encantado",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Un grupo de aventureros debe cruzar un río utilizando una balsa que solo puede transportar un máximo de dos personas a la vez.  Entre ellos se encuentran:\n\n* **El Mago:** Puede cruzar solo, pero tarda 10 minutos.\n* **El Guerrero:** Puede cruzar solo, pero tarda 8 minutos.\n* **La Sacerdotisa:** Puede cruzar solo, pero tarda 6 minutos.\n* **El Ladrón:** Puede cruzar solo, pero tarda 4 minutos.\n\nEl problema es que el Ladrón y el Guerrero se odian mutuamente y no pueden estar solos en ninguna orilla sin la supervisión del Mago o la Sacerdotisa.  Si alguno de los dos se queda solo sin la presencia del Mago o la Sacerdotisa, robará o peleará, respectivamente, retrasando el cruce indefinidamente.\n\n¿Cuál es la secuencia más eficiente (tiempo mínimo) para que todos crucen el río?\nDescribe la secuencia indicando en cada paso quiénes cruzan y en qué dirección, junto con el tiempo que tarda cada paso.  Recuerda que solo dos personas pueden cruzar al mismo tiempo.\n",
+  "objetivo": "Determina la secuencia más eficiente para que todos los aventureros crucen el río, considerando las restricciones de tiempo y las rivalidades entre el Guerrero y el Ladrón.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe la secuencia de cruces (ej: Paso 1: Mago y Ladrón cruzan; Tiempo: 4 min... )"
+  },
+  "solucion": "La solución más eficiente es la siguiente:\n\n**Paso 1:** El Ladrón y la Sacerdotisa cruzan (6 minutos)\n**Paso 2:** La Sacerdotisa regresa (6 minutos)\n**Paso 3:** El Mago y el Guerrero cruzan (10 minutos)\n**Paso 4:** El Ladrón regresa (4 minutos)\n**Paso 5:** El Ladrón y la Sacerdotisa cruzan (6 minutos)\n\n**Tiempo total: 32 minutos**\n\nEsta secuencia evita que el Ladrón y el Guerrero queden solos en ninguna orilla sin la supervisión del Mago o la Sacerdotisa."
+}

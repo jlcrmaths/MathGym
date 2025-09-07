@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Relojero",
+  "categoria": "lógica deductiva",
+  "enunciado": "El famoso relojero, Maestro Tictac, ha desaparecido dejando atrás sólo una nota críptica: \"La clave está en las horas perdidas\".  En su taller encontramos tres relojes antiguos, cada uno con una peculiaridad:\n\n* **Reloj A:** Se adelanta 2 minutos cada hora.\n* **Reloj B:** Se atrasa 3 minutos cada hora.\n* **Reloj C:**  Marca la hora correcta, pero sólo muestra las horas en números romanos (I, II, III, etc.).\n\nLos tres relojes se sincronizaron a las 12:00 (XII)  hace un tiempo indeterminado.  Actualmente, el Reloj A marca las 3:00 (III), el Reloj B marca las 1:00 (I), y el Reloj C marca las 2:00 (II).  ¿Cuántas horas han pasado desde que se sincronizaron los relojes?",
+  "objetivo": "Determina cuántas horas han pasado desde que los tres relojes se sincronizaron.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe el número de horas transcurridas..."
+  },
+  "solucion": "Han pasado 12 horas.  \n\nRazonamiento:\nEl Reloj A se adelanta 2 minutos por hora, por lo que en 'x' horas estará adelantado 2x minutos.  Si marca las 3:00 (180 minutos) y debería marcar las 12:00 (0 minutos),  entonces 180 = 2x, y x = 90 minutos o 1.5 horas. Pero esto no es correcto de forma aislada.\nEl Reloj B se atrasa 3 minutos por hora, por lo que en 'y' horas estará atrasado 3y minutos.  Si marca la 1:00 (60 minutos) y debería marcar las 12:00 (0 minutos), entonces 60 = 3y, y y = 20 minutos, lo que tampoco es correcto de forma aislada.\nSi el Reloj C marca las 2:00 (II), eso significa que las horas transcurridas han sido un múltiplo de una hora. Si juntamos los datos, la única hora posible que satisface las condiciones de adelanto y atraso para el reloj A y B es 12 horas.  12 horas de adelanto para el Reloj A: 12 * 2 minutos = 24 minutos; 12 horas de retraso para el Reloj B: 12 * 3 minutos = 36 minutos. El Reloj A debería estar adelantado 24 minutos respecto de las 12, y el reloj B atrasado 36 minutos.  Es imposible determinar la hora exacta de cada reloj de forma independiente, pero el reloj C que marca las 2:00 hace que esta solución sea la más plausible."
+}

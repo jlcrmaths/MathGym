@@ -1,0 +1,11 @@
+{
+  "titulo": "Cruzando el Río Enigma",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Un grupo de aventureros necesita cruzar un río usando una balsa que solo soporta un máximo de 100 kg.  Tienen los siguientes elementos:\n\n* Un explorador (70 kg)\n* Una científica (60 kg)\n* Un ingeniero (80 kg)\n* Un guía (50 kg)\n* Una mochila con equipo esencial (20 kg)\n\nLa balsa debe utilizarse de forma que siempre haya al menos una persona capaz de remar de regreso al otro lado.  Solo el explorador y el guía saben remar.\n\n¿Cuál es la secuencia mínima de viajes en balsa para que todos crucen el río de forma segura, teniendo en cuenta las restricciones de peso y la necesidad de remeros?\nIndica en cada viaje quienes cruzan y quienes regresan.  Por ejemplo: 'Viaje 1: Explorador y Guía cruzan; Guía regresa'.",
+  "objetivo": "Determina la secuencia mínima de viajes en balsa para que todos crucen el río.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia de viajes aquí (ej: Viaje 1: ..., Viaje 2: ..., etc.)"
+  },
+  "solucion": "Una solución posible (puede haber otras igualmente válidas):\n\nViaje 1: Explorador y Guía cruzan; Guía regresa.\nViaje 2: Científica y Explorador cruzan; Explorador regresa.\nViaje 3: Guía y Mochila cruzan; Guía regresa.\nViaje 4: Ingeniero y Guía cruzan.\n\nExplicación: Se prioriza el envío de los más pesados primero, siempre dejando un remero en cada orilla.  La mochila se lleva en el último viaje posible para optimizar el número de viajes."
+}

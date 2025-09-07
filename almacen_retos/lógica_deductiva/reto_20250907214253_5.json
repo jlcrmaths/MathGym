@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Jardín Secreto",
+  "categoria": "lógica deductiva",
+  "enunciado": "En un jardín secreto hay cuatro casas, cada una de un color diferente: roja, azul, amarilla y verde. En cada casa vive una persona de una nacionalidad diferente: inglesa, francesa, española y alemana. Cada persona tiene una mascota diferente: un perro, un gato, un loro y un canario. Cada persona tiene una bebida favorita diferente: té, café, leche y zumo. \n\nSe sabe lo siguiente:\n\n1. El inglés no vive en la casa roja.\n2. El español tiene un perro.\n3. El francés bebe café.\n4. La casa verde está a la izquierda de la casa blanca (que no existe en el enunciado pero puede despistar).\n5. El dueño del gato bebe leche.\n6. La casa amarilla está justo a la derecha de la casa azul.\n7. El alemán bebe té.\n8. El loro vive en la casa verde.\n9. El español vive en la casa amarilla.\n10. La persona que bebe zumo vive en la casa azul.\n\n¿Quién tiene el canario y qué bebida le gusta?",
+  "objetivo": "Determina quién es el dueño del canario y cuál es su bebida favorita.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu respuesta aquí (por ejemplo: 'El alemán bebe té')."
+  },
+  "solucion": "El alemán tiene el canario y su bebida favorita es el zumo.\n\nRazonamiento:\nA partir de las pistas podemos construir una tabla y ir eliminando posibilidades hasta llegar a la solución.  Por ejemplo, sabemos que el español vive en la casa amarilla y tiene un perro.  El francés bebe café. El alemán bebe té. La persona que bebe zumo vive en la casa azul. Con este razonamiento, mediante eliminación y la ubicación de las casas, se deduce que solo el alemán puede tener el canario y su bebida es el zumo. Se utiliza razonamiento deductivo y la eliminación de posibilidades para resolver el enigma."
+}

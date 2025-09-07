@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj Detenido",
+  "categoria": "lógica deductiva",
+  "enunciado": "Un reloj se detuvo a las 3:15.  Se sabe que el dueño del reloj es una persona muy meticulosa y siempre apunta sus citas en una agenda.  Analizando su agenda, encontramos las siguientes anotaciones:\n\n* Cita A: Se inicia a las 3:00 PM y dura 1 hora.\n* Cita B: Se inicia a las 3:30 PM y dura 45 minutos.\n* Cita C: Se inicia a las 4:00 PM y dura 30 minutos.\n* Cita D: Se inicia a las 4:30 PM y dura 1 hora y 15 minutos.\n\nEl reloj se detuvo justo antes, durante o después de una de estas citas.  Considera que el reloj siempre estaba funcionando correctamente hasta que se detuvo.\n\nAdicionalmente, sabemos que:\n\n* El dueño del reloj NO canceló ninguna cita.\n* El dueño del reloj llegó puntual a todas sus citas.\n* El dueño del reloj solo tenía estas cuatro citas ese día.",
+  "objetivo": "Determina qué cita estaba ocurriendo cuando el reloj se detuvo.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la letra de la cita (A, B, C o D)"
+  },
+  "solucion": "La respuesta correcta es B.  Como el reloj se detuvo a las 3:15,  la Cita A (3:00-4:00) ya habría terminado.  La Cita B (3:30-4:15) se estaba desarrollando en ese momento. La Cita C (4:00-4:30) y la Cita D (4:30-5:45) aún no habían comenzado a las 3:15."
+}

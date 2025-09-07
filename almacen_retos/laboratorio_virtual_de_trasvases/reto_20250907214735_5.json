@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista, Paracelso, ha dejado tras de sí un complejo acertijo.  Tienes tres recipientes: A, B y C.  El recipiente A contiene 8 litros de una poción roja, B contiene 5 litros de una poción azul y C está vacío.  Los recipientes no tienen marcas de medida.  Para completar la fórmula mágica, Paracelso necesita exactamente 4 litros de la poción roja en el recipiente A.\n\nUtilizando solo trasvases entre los recipientes A, B y C, sin derramar ninguna poción, ¿cómo puedes conseguir exactamente 4 litros de poción roja en el recipiente A? Describe cada paso del trasvase, indicando qué cantidad de líquido se mueve y de qué recipiente a cuál. Por ejemplo: 'Trasvasar 5 litros de A a B'.",
+  "objetivo": "Obtener exactamente 4 litros de poción roja en el recipiente A.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe cada paso del trasvase..."
+  },
+  "solucion": "1. Trasvasar 5 litros de A a B (A:3, B:5, C:0)\n2. Trasvasar 5 litros de B a C (A:3, B:0, C:5)\n3. Trasvasar 3 litros de A a B (A:0, B:3, C:5)\n4. Trasvasar 5 litros de C a A (A:5, B:3, C:0)\n5. Trasvasar 3 litros de B a C (A:5, B:0, C:3)\n6. Trasvasar 3 litros de A a B (A:2, B:3, C:3)\n7. Trasvasar 3 litros de C a A (A:5, B:3, C:0)\n8. Trasvasar 2 litros de A a C (A:3, B:3, C:2)\n9. Trasvasar 2 litros de C a B (A:3, B:5, C:0)\n10. Trasvasar 2 litros de A a C (A:1, B:5, C:2)\n11. Trasvasar 1 litro de A a B (A:0, B:6, C:2)\n12. Trasvasar 1 litro de B a A (A:1, B:5, C:2)\n13. Trasvasar 2 litros de C a A (A:3, B:5, C:0)\n14. Trasvasar 5 litros de B a C (A:3, B:0, C:5)\n15. Trasvasar 3 litros de A a B (A:0, B:3, C:5)\n16. Trasvasar 3 litros de B a A (A:3, B:0, C:5)\n17. Trasvasar 5 litros de C a A (A:8, B:0, C:0)\n18. Trasvasar 4 litros de A a C (A:4, B:0, C:4) \n\nSe puede obtener la solución de diversas maneras, esta es una posibilidad. Lo importante es describir cada paso correctamente."
+}

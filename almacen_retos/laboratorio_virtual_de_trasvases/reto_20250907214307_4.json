@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Elixir Dorado",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "En el laboratorio secreto del Alquimista, se encuentran tres recipientes: A, B y C.  El recipiente A contiene 8 litros de un elixir rojo, B contiene 5 litros de un elixir azul y C está vacío.  El Alquimista necesita obtener exactamente 4 litros de una mezcla perfecta de elixir rojo y azul, combinando cantidades iguales de cada uno.  Solo dispone de estos tres recipientes y no puede medir directamente las cantidades.  \n\nLos recipientes no tienen marcas de medición, solo se pueden vaciar completamente, llenar completamente, o verter de un recipiente a otro hasta que uno de los dos se llene o se vacíe.  \n\nDescribe la secuencia de trasvases necesarios para obtener 4 litros de mezcla perfecta (2 litros de rojo y 2 litros de azul).  Indica en cada paso qué recipiente se llena o vacía, y qué cantidades se transfieren.",
+  "objetivo": "Describe la secuencia de trasvases para obtener 2 litros de elixir rojo y 2 litros de elixir azul en un mismo recipiente.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe la secuencia de trasvases aquí..."
+  },
+  "solucion": "Una posible solución:\n\n1. Llenar completamente el recipiente C con el elixir rojo del recipiente A (A: 0, B: 5, C: 8).\n2. Vaciar el recipiente C en el recipiente B (A: 0, B: 13, C:0). Como solo cabe 5 en B, quedan 8 en B y 5 se derraman.\n3. Llenar completamente el recipiente C con el elixir rojo del recipiente A (A: 0, B: 8, C: 0).\n4. Vaciar C en B (A: 0, B: 13, C: 0), nuevamente se derramarán 3 litros de B.\n5. Llenar C con los 3 litros restantes de elixir rojo de B (A: 0, B: 5, C: 3).\n6. Llenar B con el elixir azul de B (A: 0, B: 5, C: 3).\n7. Verter 2 litros de elixir rojo de C a B (A: 0, B: 7, C: 1).\n8. Ya se tiene 2 litros de elixir azul y 2 litros de elixir rojo en B."
+}

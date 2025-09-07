@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Código Planetario",
+  "categoria": "criptoaritmética",
+  "enunciado": "Un científico ha descifrado un mensaje de una civilización extraterrestre. El mensaje utiliza un código basado en las letras del alfabeto y operaciones aritméticas.  El código descifrado muestra la siguiente ecuación:\n\nMARTE + VENUS = PLUTON\n\nDonde cada letra representa un dígito único (0-9).  'M' no puede ser 0.\n\nEncuentra el valor numérico que representa cada planeta (cada letra).  Ten en cuenta que la ecuación debe ser válida aritméticamente.",
+  "objetivo": "Descubre el valor numérico de cada letra (M, A, R, T, E, V, N, U, S, P, L, O, N) en la ecuación.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu solución aquí (ej: M=1, A=2, ...)"
+  },
+  "solucion": "Una posible solución es: M=1, A=5, R=8, T=2, E=6, V=9, N=0, U=3, S=7, P=2, L=4, O=1. \n\nPor lo tanto: 15826 + 9307 = 25133 (MARTE + VENUS = PLUTON).  Hay otras soluciones posibles que cumplen las condiciones, pero la clave es encontrar una que funcione en la suma.\nLa lógica para resolverlo implica análisis de las posibles cifras para cada letra, teniendo en cuenta las posiciones y las sumas parciales."
+}

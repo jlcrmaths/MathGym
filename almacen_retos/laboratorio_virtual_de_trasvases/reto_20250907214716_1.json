@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista, Dr. Paracelso, ha dejado un mensaje cifrado en su laboratorio.  Para descifrarlo, debes realizar una serie de trasvases precisos utilizando tres frascos de capacidades diferentes. \n\nFrasco A: 8 litros (lleno)\nFrasco B: 5 litros (vacío)\nFrasco C: 3 litros (vacío)\n\nEl mensaje se revela solo cuando se cumplen dos condiciones simultáneamente:\n\n1. El frasco A contiene exactamente 4 litros.\n2. El frasco C contiene exactamente 1 litro.\n\nSolo puedes usar los tres frascos y no hay otros instrumentos de medición disponibles.  Describe detalladamente cada paso de tu procedimiento de trasvase, indicando la cantidad de líquido en cada frasco después de cada acción.  Usa la nomenclatura A, B y C para los frascos y utiliza flechas para indicar el trasvase (ej: A → B  significa que se vierte líquido desde A hacia B).\n",
+  "objetivo": "Obtener 4 litros en el frasco A y 1 litro en el frasco C siguiendo las restricciones del enunciado.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe cada paso de tu procedimiento de trasvase aquí..."
+  },
+  "solucion": "Solución:\n\n1. A → B (A:3, B:5, C:0)\n2. B → C (A:3, B:2, C:3)\n3. C → A (A:6, B:2, C:0)\n4. A → B (A:1, B:5, C:0)\n5. B → C (A:1, B:4, C:1)\n6. C → A (A:4, B:4, C:0)\n\nSe han obtenido 4 litros en el frasco A y 1 litro en el frasco C.  El secreto del alquimista ha sido desvelado. Se trata de un problema clásico de trasvases que se resuelve con una serie de pasos lógicos, que implican llenar y vaciar completamente cada frasco o llenar hasta la capacidad de uno usando el otro."
+}

@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Relojero",
+  "categoria": "lógica deductiva",
+  "enunciado": "Un reconocido relojero, antes de morir, dejó una nota críptica para su aprendiz: \n\n\"Mis tres relojes, el de oro, el de plata y el de bronce, marcaron la hora de mi muerte. El de oro se adelanta 2 minutos por hora, el de plata se atrasa 3 minutos por hora, y el de bronce funciona correctamente.  Cuando miré por última vez mis relojes,  el de oro marcaba las 3:05, el de plata las 2:52, y el de bronce las 3:00.  Mi muerte ocurrió a las 3:00 en punto según el reloj del ayuntamiento.\"\n\n¿Cuántas horas antes de morir consultó el relojero sus tres relojes?",
+  "objetivo": "Determina cuántas horas antes de su muerte el relojero consultó sus relojes.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe el número de horas aquí..."
+  },
+  "solucion": "El relojero consultó sus relojes 6 horas antes de morir.  \n\nRazonamiento: Si el reloj de bronce marcaba las 3:00 en el momento de la muerte, y el de oro se adelanta 2 minutos por hora,  para que marcara las 3:05, debían haber pasado 2.5 horas (15 minutos/2 minutos por hora = 7.5 horas, luego hay que dividir por 3 porque son 15 minutos).   Similiarmente, el reloj de plata se atrasa 3 minutos por hora, y marcaba las 2:52, indicando que han pasado 2.66 horas (8 minutos/3 minutos por hora = 2.66 horas). Para llegar a un tiempo aproximado común, tomamos un promedio de 2.5 y 2.66 horas que resulta en 2.58 horas.  Dado que la hora de muerte fue las 3:00 del reloj de bronce, podemos aproximar que el relojero consultó sus relojes alrededor de las 3:00 - 2.58 horas ≈ 0:02. La unica respuesta lógica sería 6 horas, dado que cualquier hora antes no se alinearía con el tiempo estimado del reloj de oro y plata."
+}

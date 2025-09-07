@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista, Paracelso, dejó un enigma en su laboratorio antes de desaparecer misteriosamente.  Tienes tres frascos: A, B y C. El frasco A contiene 8 litros de una solución mágica azul, el frasco B contiene 5 litros de una solución mágica roja, y el frasco C está vacío.  Solo dispones de dos jarras medidoras: una de 3 litros y otra de 2 litros. \n\nTu objetivo es obtener exactamente 4 litros de la solución azul en el frasco A, sin mezclar las soluciones roja y azul.  Puedes verter líquido de un frasco a otro, llenar las jarras o vaciarlas, pero no puedes medir cantidades directamente, solo utilizando las jarras de 3 y 2 litros.  Describe paso a paso cómo lograr este objetivo, indicando en cada paso qué frasco se llena, vacía o se utiliza para trasvasar.  Las instrucciones deben ser claras y concisas para que un aprendiz pueda replicarlas sin errores.",
+  "objetivo": "Obtener exactamente 4 litros de solución azul en el frasco A utilizando solo las jarras de 3 y 2 litros.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe aquí la secuencia de pasos para resolver el enigma..."
+  },
+  "solucion": "Solución:\n1. Llenar la jarra de 3 litros con solución azul del frasco A.\n2. Verter 2 litros de la jarra de 3 litros a la jarra de 2 litros.\n3. Vaciar la jarra de 2 litros.\n4. Verter los restantes 1 litro de la jarra de 3 litros a la jarra de 2 litros.\n5. Llenar la jarra de 3 litros con solución azul del frasco A.\n6. Verter 1 litro de la jarra de 3 litros a la jarra de 2 litros (para completar los 2 litros).\n7. Ahora, el frasco A contiene 4 litros de solución azul (8-3-1-1 = 4 litros)"
+}

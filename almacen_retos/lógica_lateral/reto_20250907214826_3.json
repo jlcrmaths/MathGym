@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Reloj Detenido",
+  "categoria": "lógica lateral",
+  "enunciado": "Un detective llega a una escena del crimen.  Encuentra un reloj de pared parado a las 3:15.  Observa que el reloj está roto, la manecilla de las horas está ligeramente doblada y la de los minutos está completamente recta.  No hay signos de forzamiento en el reloj o la pared. \n\nEl detective nota también un vaso roto cerca del reloj, algunos papeles esparcidos por el suelo, y una nota garabateada que dice 'Demasiado tarde'.  El cuerpo de la víctima está en el suelo, al lado del reloj.\n\nEl dueño de la casa, conocido por ser un coleccionista de relojes antiguos y de carácter meticuloso, es la víctima.  Curiosamente, el detective no encontró ninguna señal de violencia física en el cuerpo.",
+  "objetivo": "Determina la causa probable de la muerte basándote en los detalles proporcionados.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe tu hipótesis aquí..."
+  },
+  "solucion": "La causa probable de la muerte fue un ataque al corazón.  El reloj detenido a las 3:15 indica la hora aproximada de la muerte, pero el hecho de que esté roto y las manecillas estén dañadas sugiere que la víctima, un coleccionista meticuloso, se enfadó o sufrió un susto considerable antes de su muerte.  El vaso roto y los papeles esparcidos indican un posible incidente repentino e inesperado, lo que concuerda con un ataque al corazón.  La nota 'Demasiado tarde' podría ser una simple coincidencia o bien una expresión de desesperación justo antes de morir."
+}

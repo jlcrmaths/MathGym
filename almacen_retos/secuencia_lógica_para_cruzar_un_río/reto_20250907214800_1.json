@@ -1,0 +1,11 @@
+{
+  "titulo": "Cruzando el Río Místico",
+  "categoria": "secuencia lógica para cruzar un río",
+  "enunciado": "Un grupo de aventureros necesita cruzar un río utilizando una única balsa con capacidad para un máximo de dos personas.  Tienen que transportar a un mago, un guerrero, un ladrón y un cura. Sin embargo, existen ciertas restricciones:\n\n* El mago y el ladrón no pueden estar solos en ningún lado de la orilla, ya que el mago se enfadaría y el ladrón robaría todo.\n* El guerrero y el cura se detestan, por lo que no pueden viajar juntos en la balsa.\n\nLa balsa solo puede ser manejada por una persona a la vez, o dos personas que puedan cooperar.\n\n¿Cuál es la secuencia correcta de viajes en balsa para que todos crucen el río de forma segura?  Indica cada viaje con la pareja que cruza (o la persona individual) y la dirección (de la orilla A a la orilla B, o viceversa).",
+  "objetivo": "Determina la secuencia de viajes en balsa que permita a todos cruzar el río respetando las restricciones.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Escribe la secuencia de viajes (ej: Mago y Guerrero -> B, ...)"
+  },
+  "solucion": "Una solución posible es:\n\n1. Mago y Guerrero -> B (El guerrero es la única opción para llevar la balsa de vuelta)\n2. Guerrero -> A\n3. Ladrón y Cura -> B (El cura es la única opción para llevar la balsa de vuelta)\n4. Cura -> A\n5. Mago y Guerrero -> B\n\nExplicación: Esta secuencia evita que el mago y el ladrón queden solos, y que el guerrero y el cura viajen juntos. Cada paso asegura que siempre hay alguien capaz de regresar con la balsa."
+}

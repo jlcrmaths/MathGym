@@ -1,0 +1,11 @@
+{
+  "titulo": "El Enigma del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista, Arquímedes el Segundo, ha dejado un enigma en su laboratorio.  Tiene tres frascos: A, B y C. El frasco A contiene 8 litros de una poción mágica roja, el frasco B contiene 5 litros de una poción mágica azul y el frasco C está vacío.  Arquímedes solo dispone de dos herramientas: un embudo y un sistema de trasvase que permite vaciar completamente el contenido de un frasco en otro, o llenar un frasco hasta su capacidad máxima con pociones de cualquier color.  \n\nEl enigma consiste en obtener exactamente 4 litros de poción roja en el frasco A y 4 litros de poción azul en el frasco B, utilizando solo las herramientas disponibles.  Recuerda que no puedes medir cantidades intermedias, solo llenados y vaciados completos.  Registra cada paso de tu proceso.  Por ejemplo: 'Vaciar A en C' o 'Llenar B desde la fuente'.",
+  "objetivo": "Obtener 4 litros de poción roja en el frasco A y 4 litros de poción azul en el frasco B siguiendo las restricciones del enigma.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe cada paso del trasvase (ej: 'Vaciar A en C', 'Llenar B desde la fuente')..."
+  },
+  "solucion": "Una posible solución:\n\n1. Llenar C desde A (C=8, A=0)\n2. Vaciar C en B (C=0, B=5)\n3. Llenar C desde A (C=0, A=0)\n4. Vaciar A en B (A=3, B=5)\n5. Llenar A desde la fuente (A=8, B=5)\n6. Vaciar A en C (A=0, C=8)\n7. Llenar A desde B (A=3, B=2)\n8. Vaciar A en C (A=0, C=3)\n9. Vaciar B en A (A=2, B=0)\n10.Llenar B desde la fuente (A=2, B=5)\n11.Vaciar B en C (A=2, B=0, C=8)\n12.Llenar B desde A (A=0, B=2)\n13.Llenar A desde la fuente (A=8, B=2)\n14.Vaciar A en C hasta que C este lleno (A=4, B=2, C=8)\n\nAhora tenemos 4 litros de poción roja en A.  Para obtener 4 litros de azul en B, debemos vaciar C en B y luego llenar C desde la fuente hasta llenar B.  Se podrían utilizar otros métodos para llegar a la solución."
+}

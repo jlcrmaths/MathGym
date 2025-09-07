@@ -1,0 +1,11 @@
+{
+  "titulo": "El Misterio del Alquimista",
+  "categoria": "laboratorio virtual de trasvases",
+  "enunciado": "El famoso alquimista, Orfeo, ha dejado un complejo rompecabezas en su laboratorio.  Tiene tres recipientes: A, B y C.  El recipiente A contiene 8 litros de un elixir rojo, B contiene 5 litros de un elixir azul y C está vacío.  Orfeo solo dispone de dos jarras: una de 3 litros y otra de 5 litros. \n\nSu objetivo es obtener exactamente 4 litros de elixir rojo en el recipiente A.  Las únicas acciones permitidas son llenar una jarra completamente desde un recipiente, vaciar una jarra completamente en un recipiente, o verter el contenido de una jarra en otra hasta que una de ellas se llene o se vacíe. \n\nDescribe la secuencia de pasos necesarios para lograr la meta.  Recuerda especificar qué cantidad de cada elixir hay en cada recipiente tras cada paso.  Si alguna acción es imposible debido a la capacidad de las jarras, indícalo.",
+  "objetivo": "Obtener 4 litros de elixir rojo en el recipiente A usando solo las jarras de 3 y 5 litros.",
+  "elementos_interactivos": {
+    "tipo": "texto_libre",
+    "placeholder": "Describe la secuencia de pasos aquí..."
+  },
+  "solucion": "1. Llenar la jarra de 5 litros desde el recipiente A (A: 3, B: 5, C: 0, Jarra 5: 5, Jarra 3: 0)\n2. Vaciar la jarra de 5 litros en el recipiente B (A: 3, B: 10, C: 0, Jarra 5: 0, Jarra 3: 0)\n3. Llenar la jarra de 5 litros desde el recipiente A (A: 0, B: 10, C: 0, Jarra 5: 5, Jarra 3: 0)\n4. Vaciar parte de la jarra de 5 litros en la jarra de 3 litros (A: 0, B: 10, C: 0, Jarra 5: 2, Jarra 3: 3)\n5. Vaciar la jarra de 3 litros en el recipiente C (A: 0, B: 10, C: 3, Jarra 5: 2, Jarra 3: 0)\n6. Vaciar la jarra de 5 litros en el recipiente A (A: 2, B: 10, C: 3, Jarra 5: 0, Jarra 3: 0)\n7. Llenar la jarra de 3 litros desde el recipiente B (A: 2, B: 7, C: 3, Jarra 5: 0, Jarra 3: 3)\n8. Vaciar la jarra de 3 litros en el recipiente A (A: 5, B: 7, C: 3, Jarra 5: 0, Jarra 3: 0)\n9. Llenar la jarra de 5 litros desde el recipiente B (A: 5, B: 2, C: 3, Jarra 5: 5, Jarra 3: 0)\n10. Vaciar parte de la jarra de 5 litros en el recipiente A para dejar 4 litros en el recipiente A (A: 4, B: 2, C: 3, Jarra 5: 1, Jarra 3: 0)"
+}
