@@ -1,4 +1,4 @@
-∫document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const contenedor = document.getElementById('lista-archivo');
     
     fetch('lista_retos.json')
