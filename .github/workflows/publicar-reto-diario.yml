@@ -1,40 +1,65 @@
-name: Publicar Reto Diario
+name: Publicar Reto Diario y Desplegar Web
 
 on:
-  # Se activa de Lunes a Viernes a las 06:05 UTC (08:05 en España en verano)
   schedule:
-    - cron: "5 6 * * 1-5"
-  
-  # Permite activarlo manualmente desde la pestaña "Actions" de GitHub
-  workflow_dispatch: {}
+    # Se ejecuta a las 5:30 AM UTC, de Lunes a Viernes
+    - cron: '30 5 * * 1-5'
+  workflow_dispatch: # Permite ejecutarlo manualmente
+
+# Permisos especiales para que el robot pueda desplegar en GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  publicar-reto:
+  # TRABAJO 1: Preparar el reto del día
+  preparar_reto:
     runs-on: ubuntu-latest
     steps:
-      # 1. Descarga el código de tu repositorio
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      # 2. Ejecuta el script de Python para que haga la lógica
-      - name: Ejecutar la lógica de publicación
-        run: python3 reto_diario.py
-        env:
-          # Los secretos se pasan al script de forma segura
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FIREBASE_CREDS: ${{ secrets.FIREBASE_CREDS }}
-      
-      # 3. Sube los cambios (el nuevo reto.json y el reto movido)
-      - name: Guardar y subir los cambios si existen
+      - name: Configurar Git
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # Comprueba si hay algún cambio. Si no hay, no hace nada.
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No hay cambios para subir."
-          else
-            git add .
-            git commit -m "🚀 Reto del día publicado automáticamente"
-            git push
+          git config --global user.name 'Mathgym Publisher Bot'
+          git config --global user.email 'actions@github.com'
+
+      - name: Publicar el reto más antiguo del almacén
+        id: publicador
+        run: |
+          RETO_A_PUBLICAR=$(find almacen_retos -type f -printf '%T+ %p\n' | sort | head -n 1 | cut -d' ' -f2-)
+          if [ -z "$RETO_A_PUBLICAR" ]; then
+            echo "⚠️ ¡Almacén de retos vacío!"
+            echo "COMMIT_NEEDED=false" >> $GITHUB_ENV
+            exit 0
           fi
+          echo "✅ Publicando el reto: $RETO_A_PUBLICAR"
+          cp "$RETO_A_PUBLICAR" "reto.json"
+          rm "$RETO_A_PUBLICAR"
+          echo "COMMIT_NEEDED=true" >> $GITHUB_ENV
+
+      - name: Guardar los cambios (si los hay)
+        if: env.COMMIT_NEEDED == 'true'
+        run: |
+          git add reto.json
+          git rm $(git ls-files --deleted)
+          git commit -m "🚀 Publicado el reto del día $(date +'%Y-%m-%d')"
+          git push
+
+  # TRABAJO 2: Desplegar la web en GitHub Pages
+  desplegar_web:
+    # Este trabajo solo se ejecuta después de que el anterior termine con éxito
+    needs: preparar_reto
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+      - name: Subir artefactos de la web
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Sube todo el contenido del repositorio
+      - name: Desplegar en GitHub Pages
+        uses: actions/deploy-pages@v4
