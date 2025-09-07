@@ -1,0 +1,70 @@
+name: Generar Contenido Manualmente
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install google-generativeai
+
+      - name: Crear script generador
+        run: |
+          cat << 'EOF' > generar_script.py
+          import google.generativeai as genai
+          import json
+          import os
+
+          GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+          if not GEMINI_API_KEY:
+              raise ValueError("API Key de Gemini no encontrada.")
+          genai.configure(api_key=GEMINI_API_KEY)
+          model = genai.GenerativeModel('gemini-pro')
+
+          CATEGORIAS = ["lógica deductiva", "laboratorio virtual de trasvases", "criptoaritmética", "secuencia lógica para cruzar un río", "lógica lateral"]
+
+          def generar_un_reto(categoria, ruta_guardado):
+              print(f"Generando para: {categoria}...")
+              prompt = f"Crea un reto de lógica sobre '{categoria}'. Devuelve EXCLUSIVAMENTE en formato JSON: {{\"titulo\": \"...\", \"objetivo\": \"...\"}}"
+              try:
+                  response = model.generate_content(prompt)
+                  json_text = response.text.replace("```json", "").replace("```", "").strip()
+                  reto_json = json.loads(json_text)
+                  os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
+                  with open(ruta_guardado, "w", encoding="utf-8") as f:
+                      json.dump(reto_json, f, ensure_ascii=False, indent=2)
+                  print(f"✅ Guardado en {ruta_guardado}")
+              except Exception as e:
+                  print(f"❌ ERROR en '{categoria}': {e}")
+
+          print("Iniciando generación de lote...")
+          for categoria_nombre in CATEGORIAS:
+              nombre_carpeta = categoria_nombre.replace(" ", "_")
+              for i in range(1, 6):
+                  ruta = f"almacen_retos/{nombre_carpeta}/reto_{i}.json"
+                  generar_un_reto(categoria_nombre, ruta)
+          print("🎉 Proceso finalizado.")
+          EOF
+
+      - name: Ejecutar script generador
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 generar_script.py
+
+      - name: Subir los retos generados
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add almacen_retos/
+          git commit -m "🤖 Lote de retos generado" || echo "No hay nuevos retos."
+          git push
