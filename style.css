@@ -1,14 +1,19 @@
+/* =========================================================
+   MathGym — Hoja de estilos principal
+   ========================================================= */
+
+/* ---------- Variables ---------- */
 :root {
     --bg-grad-1: #0f1724;                 /* Fondo base más limpio */
     --bg-grad-2: #1e2a3a;                 /* Degradado sutil */
     --azul-espacio-profundo: #1e2a3a;     /* Conservamos tu paleta */
     --azul-pizarra: #243447;              /* Un poco más legible que #2c3e50 */
-    --blanco-nube: #f5f7fa;               /* Blanco más cálido para contraste */
+    --blanco-nube: #f5f7fa;               /* Blanco cálido para contraste */
     --gris-300: #cfd8e3;
     --gris-500: #9aa4b2;
     --gris-700: #5b6470;
   
-    --amarillo-cibernetico: #f6c90e;      /* Un amarillo más vivo y menos ‘mostaza’ */
+    --amarillo-cibernetico: #f6c90e;      /* Amarillo vivo */
     --turquesa-vibrante: #1abc9c;
   
     --ring: #f6c90e;
@@ -37,7 +42,7 @@
     --space-12: 3rem;
   }
   
-  /* ====== BASE ====== */
+  /* ---------- Base ---------- */
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
@@ -63,10 +68,13 @@
   a:hover { text-decoration: underline; }
   img { max-width: 100%; display: block; }
   
-  /* ====== CABECERA (LOGO + TÍTULO) ====== */
+  /* ---------- Cabecera (logo + título) ---------- */
   .logo-container {
-    display: flex; align-items: center; justify-content: center;
-    gap: var(--space-4); margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
   }
   .logo-mascota {
     width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
@@ -81,7 +89,7 @@
     text-shadow: 0 2px 16px rgba(246,201,14,0.22);
   }
   
-  /* ====== CONTENEDOR PRINCIPAL ====== */
+  /* ---------- Contenedor principal ---------- */
   #contenedor-juego,
   .contenedor-preprod,
   .contenedor-archivo {
@@ -107,15 +115,22 @@
     font-size: clamp(.95rem, 1.6vw, 1.05rem);
   }
   
-  /* ====== HERO ENTRENADOR (DECEERRE) ====== */
+  /* ---------- Accesibilidad ---------- */
   .visually-hidden {
-    position: absolute !important; 
-    height: 1px; width: 1px; 
-    overflow: hidden; 
-    clip: rect(1px, 1px, 1px, 1px); 
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
   }
+  a:focus, .boton-regenerar:focus, .estrellas span:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
   
+  /* ---------- Hero del entrenador ---------- */
   .coach-hero {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -124,7 +139,6 @@
     margin: var(--space-6) 0 var(--space-4);
     position: relative;
   }
-  
   .coach {
     position: relative; margin: 0; z-index: 1;
   }
@@ -135,7 +149,7 @@
       0 10px 30px rgba(0,0,0,0.35),
       0 0 0 4px rgba(255,255,255,0.06),
       0 0 0 8px rgba(26,188,156,0.18);
-    filter: none !important; /* que no le afecten filtros de otros elementos */
+    filter: none !important;
     transform: translateZ(0);
     animation: coach-bob 7s ease-in-out infinite;
   }
@@ -150,7 +164,7 @@
     position: absolute;
     left: -14px; top: -14px; transform: translate(-100%, 0);
     max-width: 280px;
-    background: #111826; /* un poco más oscuro que el card para destacar */
+    background: #111826; /* más oscuro para destacar */
     color: var(--blanco-nube);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius-md);
@@ -169,10 +183,14 @@
     color: var(--amarillo-cibernetico);
     font-size: .98rem; display: block; margin-bottom: 4px;
   }
-  
   /* Animación sutil */
-  @keyframes coach-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
-  @media (prefers-reduced-motion: reduce) { .coach__avatar { animation: none; } }
+  @keyframes coach-bob {
+    0%,100% { transform: translateY(0) }
+    50% { transform: translateY(-4px) }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coach__avatar { animation: none; }
+  }
   .coach:hover .coach__avatar {
     transition: transform .25s ease, box-shadow .25s ease;
     transform: translateY(-2px);
@@ -182,14 +200,17 @@
       0 0 0 10px rgba(26,188,156,0.22);
   }
   
-  /* ====== ICONO DEL RETO ====== */
+  /* ---------- Icono del reto ---------- */
   .imagen-container { margin: var(--space-6) 0 var(--space-4); text-align: center; }
   #imagen-reto {
+    width: 104px;
+    height: 104px;
     max-width: 104px;
+    object-fit: contain;
     filter: invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.25));
   }
   
-  /* ====== INFO (visitas / valoración) ====== */
+  /* ---------- Info (visitas / valoración) ---------- */
   #info-reto {
     display: flex; justify-content: space-between; align-items: center;
     gap: var(--space-4);
@@ -200,7 +221,7 @@
     color: var(--gris-300);
   }
   
-  /* ====== LABORATORIO PLACEHOLDER ====== */
+  /* ---------- Laboratorio placeholder ---------- */
   #laboratorio-placeholder {
     padding: var(--space-8);
     border-radius: var(--radius-md);
@@ -209,7 +230,7 @@
     border: 2px dashed rgba(255,255,255,0.15);
   }
   
-  /* ====== VALORACIÓN ====== */
+  /* ---------- Valoración ---------- */
   #sistema-valoracion { margin-top: var(--space-8); text-align: center; }
   #sistema-valoracion p { margin-top: 0; color: var(--gris-300); }
   .estrellas {
@@ -222,10 +243,13 @@
     transition: color .2s ease, transform .12s ease, filter .2s ease;
     padding: 0 .05em;
   }
-  .estrellas span:hover { color: var(--amarillo-cibernetico); filter: drop-shadow(0 2px 10px rgba(246,201,14,0.25)); }
+  .estrellas span:hover {
+    color: var(--amarillo-cibernetico);
+    filter: drop-shadow(0 2px 10px rgba(246,201,14,0.25));
+  }
   .estrellas span:active { transform: scale(0.95); }
   
-  /* ====== BOTONES / ENLACES DE ACCIÓN ====== */
+  /* ---------- Botones / Enlaces de acción ---------- */
   .boton-regenerar {
     background-color: #e67e22; border: none; color: white;
     padding: 10px 14px; border-radius: var(--radius-sm); cursor: pointer;
@@ -237,7 +261,7 @@
   .boton-regenerar:active { transform: translateY(1px); }
   .boton-regenerar:disabled { background-color: #7f8c8d; cursor: not-allowed; box-shadow: none; }
   
-  /* ====== COMPARTIR ====== */
+  /* ---------- Compartir ---------- */
   .sharing-container {
     margin-top: var(--space-8); text-align: center; padding-top: var(--space-4);
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -255,8 +279,12 @@
   }
   .sharing-container a:hover { background-color: #16a085; transform: translateY(-1px); }
   .sharing-container a:active { transform: translateY(0); }
+  .sharing-container a:focus {
+    box-shadow: 0 0 0 3px rgba(246,201,14,0.55), 0 6px 16px rgba(26,188,156,0.22);
+    outline: none;
+  }
   
-  /* ====== LISTA ARCHIVO ====== */
+  /* ---------- Lista archivo (si se usa en otras vistas) ---------- */
   .item-archivo {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.08);
@@ -267,17 +295,10 @@
   }
   .item-archivo .info small { color: var(--gris-500); }
   
-  /* ====== ACCESIBILIDAD ====== */
-  a:focus, .boton-regenerar:focus, .estrellas span:focus {
-    outline: 2px solid var(--ring);
-    outline-offset: 3px;
-    border-radius: 6px;
-  }
-  
-  /* ====== RESPONSIVE ====== */
+  /* ---------- Responsive ---------- */
   @media (max-width: 860px) {
     body { padding: var(--space-4); }
     .coach-hero { grid-template-columns: 1fr; justify-items: center; text-align: center; }
     .coach__bubble { position: static; transform: none; margin-bottom: var(--space-4); }
   }
-  /* ====== RESPONSIVE ====== */
+  

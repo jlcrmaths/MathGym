@@ -1,91 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>MathGym - Tu Reto de Lógica Diario</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>MathGym — Tu reto de lógica diario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Entrena tu mente cada día con un reto de lógica en MathGym. Resuelve, vota y comparte. ¡Ponte en forma mental con Deceerre!" />
+  <meta name="theme-color" content="#0f1724" />
 
-    <!-- Tipografías -->
-    https://fonts.googleapis.com
-    https://fonts.gstatic.com
-    <link href="https://fonts.googleapis.com/css2?family=Loppins:wght@700&display=swap
+  <!-- Open Graph / Twitter (sustituye URL e imagen por los tuyos reales) -->
+  <meta property="og:title" content="MathGym — Reto de lógica del día" />
+  <meta property="og:description" content="¿Puedes con el reto de hoy? Entra, resuelve y comparte tu puntuación." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tu-dominio.example/" />
+  <meta property="og:image" content="https://tu-dominio.example/assets/og-mathgym.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Estilos -->
-    <link rel="stylesheet" href="style.css">
+  <!-- Tipografías -->
+  https://fonts.googleapis.com
+  https://fonts.gstatic.com
+  https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato:wght@400;700&display=swap
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 </head>
 <body>
-    <div class="logo-container">
-        <img src="assets/deceerre.png" alt="Deceerre, entrenador de MathGym" class="logo-mascota">
-        <h1>MathGym</h1>
+  <header class="logo-container">
+    <img
+      src="assets/deceerre.png"
+      alt="Deceerre, entrenador de MathGym"
+      class="logo-mascota"
+      width="56"
+      height="56"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <h1>MathGym</h1>
+  </header>
+
+  <!-- Contenido principal -->
+  <main id="contenedor-juego" role="main">
+    <header>
+      <h2 id="titulo-reto">Cargando el reto de hoy...</h2>
+      <p id="objetivo-reto"></p>
+    </header>
+
+    <!-- HERO del entrenador -->
+    <section class="coach-hero" aria-labelledby="coach-hero-title">
+      <h2 id="coach-hero-title" class="visually-hidden">Entrenador MathGym</h2>
+      <figure class="coach" aria-labelledby="coach-name">
+        <img
+          src="assets/deceerre.png"
+          alt="Deceerre, tu entrenador en MathGym"
+          class="coach__avatar"
+          width="192"
+          height="192"
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption id="coach-name" class="visually-hidden">Deceerre</figcaption>
+        <div class="coach__badge" aria-hidden="true">🏋️‍♂️</div>
+        <div class="coach__bubble" id="coach-bubble" aria-live="polite">
+          <strong>¡Listo para entrenar!</strong>
+          <span>El reto de hoy te espera.</span>
+        </div>
+      </figure>
+    </section>
+
+    <div class="imagen-container">
+      <img id="imagen-reto" src="" alt="Icono del reto" width="104" height="104" />
     </div>
 
-    <div id="contenedor-juego">
-        <header>
-            <h2 id="titulo-reto">Cargando el reto de hoy...</h2>
-            <p id="objetivo-reto"></p>
-        </header>
-
-        <!-- 👉 HERO del entrenador (Deceerre): NUEVO BLOQUE -->
-        <section class="coach-hero" aria-labelledby="coach-hero-title">
-          <h2 id="coach-hero-title" class="visually-hidden">Entrenador MathGym</h2>
-          <figure class="coach" aria-labelledby="coach-name">
-            <img
-              src="assets/deceerre.png"
-              alt="Deceerre, tu entrenador en MathGym"
-              class="coach__avatar"
-              width="192"
-              height="192"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption id="coach-name" class="visually-hidden">Deceerre</figcaption>
-            <div class="coach__badge" aria-hidden="true">🏋️‍♂️</div>
-            <div class="coach__bubble" id="coach-bubble">
-              <strong>¡Listo para entrenar!</strong>
-              <span>El reto de hoy te espera.</span>
-            </div>
-          </figure>
-        </section>
-        <!-- 👆 FIN HERO del entrenador -->
-
-        <div class="imagen-container">
-            <img id="imagen-reto" src="" alt="Icono del reto">
-        </div>
-
-        <div id="info-reto">
-            <span id="contador-visitas">👁️ --</span>
-            <span id="valoracion-reto">⭐ --/5</span>
-        </div>
-
-        <main id="laboratorio-placeholder">
-            <p>Aquí se mostraría la simulación interactiva del reto.</p>
-        </main>
-
-        <div id="sistema-valoracion">
-            <p>¿Te ha gustado el reto? ¡Vótalo!</p>
-            <div class="estrellas">
-                <span data-valor="1">☆</span><span data-valor="2">☆</span><span data-valor="3">☆</span><span data-valor="4">☆</span><span data-valor="5">☆</span>
-            </div>
-        </div>
-
-        <div class="sharing-container">
-            <p>¡Comparte el reto!</p>
-            <a id="share-twitter" href="#" target="_blank" rel="noopener">Twitter</a>
-            <a id="share-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
+    <div id="info-reto" aria-live="polite">
+      <span id="contador-visitas">👁️ --</span>
+      <span id="valoracion-reto">⭐ --/5</span>
     </div>
 
-    <footer>
-        <p>© 2025 MathGym — <a href="archivo.html">Ver retos anteriores</a></p>
-    </footer>
+    <section id="laboratorio-placeholder" aria-live="polite">
+      <p>Aquí se mostraría la simulación interactiva del reto.</p>
+    </section>
 
-    <!-- Firebase (compat) -->
-    https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js
-    <script src.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js>
-    </script>
+    <section id="sistema-valoracion" aria-labelledby="rating-title">
+      <h3 id="rating-title" class="visually-hidden">Valora el reto</h3>
+      <p>¿Te ha gustado el reto? ¡Vótalo!</p>
+      <div class="estrellas" role="group" aria-label="Valoración de 1 a 5">
+        <span data-valor="1">☆</span><span data-valor="2">☆</span><span data-valor="3">☆</span><span data-valor="4">☆</span><span data-valor="5">☆</span>
+      </div>
+    </section>
 
-    <!-- Lógica -->
-    <script src="script.js"></script>
+    <section class="sharing-container" aria-labelledby="share-title">
+      <h3 id="share-title" class="visually-hidden">Compartir</h3>
+      <p>¡Comparte el reto!</p>
+      <a id="share-twitter" href="#" target="_blank" rel="noopener">Twitter</a>
+      <a id="share-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MathGym — <a href="archivo.html">Ver retos anteriores</a></p>
+  </footer>
+
+  <!-- Firebase (compat) -->
+  https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js
+  https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js
+
+  <!-- Lógica -->
+  <script src="script.js" defer></script>
 </body>
 </html>
+
 
