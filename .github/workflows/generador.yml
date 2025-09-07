@@ -1,0 +1,38 @@
+name: Generar Contenido Manualmente
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout de la rama develop
+        uses: actions/checkout@v4
+        with:
+          ref: 'develop'
+
+      - name: Configurar Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar librerías
+        run: pip install google-generativeai
+
+      - name: Ejecutar el script de generación
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GENERATION_MODE: 'bulk'
+          # Reducimos a 2 por categoría para una prueba más rápida
+          COUNT_PER_CATEGORY: '2' 
+        run: python reto_diario.py
+
+      - name: Guardar los retos generados
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add almacen_retos/*
+          git commit -m "🤖 Contenido generado manualmente"
+          git push
