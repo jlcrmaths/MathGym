@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Cambia la URL por la de tu web una vez esté online
+Sitemap: https://jlcrmaths.netlify.app/sitemap.xml

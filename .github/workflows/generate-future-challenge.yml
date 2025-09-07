@@ -1,0 +1,36 @@
+name: Generar Reto Futuro (Preproducción)
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    inputs:
+      fecha_regenerar:
+        description: 'Fecha a regenerar (YYYY-MM-DD)'
+        required: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: 'develop' }
+      - uses: actions/setup-python@v4
+        with: { python-version: '3.10' }
+      - run: pip install google-generativeai firebase-admin
+      - name: Ejecutar script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FIREBASE_CREDS: ${{ secrets.FIREBASE_CREDS }}
+          FECHA_REGENERAR: ${{ github.event.inputs.fecha_regenerar }}
+        run: python reto_diario.py
+      - name: Actualizar lista de retos en develop
+        run: |
+          ls -R retos
+          python -c "import json; import os; from datetime import datetime; files = sorted([f for f in os.listdir('retos') if f.endswith('.json')]); data = []; [data.append(json.load(open(os.path.join('retos', f), 'r', encoding='utf-8'))) for f in files]; data.sort(key=lambda x: datetime.strptime(x['fecha'], '%Y-%m-%d'), reverse=True); json.dump([{'fecha': r['fecha'], 'titulo': r['titulo']} for r in data], open('lista_retos.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=2);"
+      - name: Guardar reto futuro
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add retos/* lista_retos.json
+          git commit -m "🤖 Nuevo reto futuro generado/actualizado" || echo "No hay cambios"
+          git push

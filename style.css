@@ -1,0 +1,23 @@
+:root {
+    --azul-pizarra: #2c3e50;
+    --naranja-intenso: #e67e22;
+    --purpura-amatista: #9b59b6;
+    --blanco-nube: #ecf0f1;
+    --font-titulos: 'Montserrat', sans-serif;
+    --font-textos: 'Inter', sans-serif;
+}
+
+body { 
+    font-family: var(--font-textos); 
+    background-color: var(--azul-pizarra); 
+    /* El resto de las propiedades de body no cambian */
+}
+h1, h2 { font-family: var(--font-titulos); }
+
+.logo-container h1 { color: var(--naranja-intenso); /* Cambiado de amarillo a naranja */ }
+
+header h2 { color: var(--purpura-amatista); /* Cambiado de turquesa a púrpura */ }
+
+/* Puedes ajustar otros colores como los botones o enlaces para que usen la nueva paleta */
+.sharing-container a { background-color: var(--purpura-amatista); }
+.sharing-container a:hover { background-color: #8e44ad; }
