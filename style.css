@@ -1,23 +1,254 @@
 :root {
+    --azul-espacio-profundo: #1e2a3a;
     --azul-pizarra: #2c3e50;
-    --naranja-intenso: #e67e22;
-    --purpura-amatista: #9b59b6;
     --blanco-nube: #ecf0f1;
-    --font-titulos: 'Montserrat', sans-serif;
-    --font-textos: 'Inter', sans-serif;
-}
-
-body { 
-    font-family: var(--font-textos); 
-    background-color: var(--azul-pizarra); 
-    /* El resto de las propiedades de body no cambian */
-}
-h1, h2 { font-family: var(--font-titulos); }
-
-.logo-container h1 { color: var(--naranja-intenso); /* Cambiado de amarillo a naranja */ }
-
-header h2 { color: var(--purpura-amatista); /* Cambiado de turquesa a púrpura */ }
-
-/* Puedes ajustar otros colores como los botones o enlaces para que usen la nueva paleta */
-.sharing-container a { background-color: var(--purpura-amatista); }
-.sharing-container a:hover { background-color: #8e44ad; }
+    --amarillo-cibernetico: #f1c40f;
+    --turquesa-vibrante: #1abc9c;
+    --font-titulos: 'Poppins', sans-serif;
+    --font-textos: 'Lato', sans-serif;
+  }
+  
+  /* ====== BASE ====== */
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-textos);
+    background-color: var(--azul-espacio-profundo);
+    color: var(--blanco-nube);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+  }
+  a { color: var(--turquesa-vibrante); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header, footer { text-align: center; }
+  h1, h2 { font-family: var(--font-titulos); margin: 0 0 .5rem 0; }
+  
+  /* ====== LOGO / CABECERA ====== */
+  .logo-container {
+    display: flex; align-items: center; justify-content: center;
+    gap: 15px; margin-bottom: 20px;
+  }
+  .logo-mascota {
+    width: 54px; height: 54px;
+    border-radius: 50%; object-fit: cover;
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    padding: 4px;
+  }
+  .logo-container h1 { font-size: 2.5rem; color: var(--amarillo-cibernetico); }
+  
+  /* ====== CONTENEDORES ====== */
+  #contenedor-juego, .contenedor-preprod, .contenedor-archivo {
+    background-color: var(--azul-pizarra);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+  header h2 { margin-top: 0; color: var(--turquesa-vibrante); }
+  
+  /* ====== IMAGEN DEL RETO ====== */
+  .imagen-container { margin: 20px 0; text-align: center; }
+  #imagen-reto {
+    filter: invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.3));
+    max-width: 100px;
+  }
+  
+  /* ====== INFO (visitas / valoración) ====== */
+  #info-reto {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px; background-color: var(--azul-espacio-profundo);
+    border-radius: 8px; margin: 20px 0; color: #bdc3c7;
+  }
+  
+  /* ====== LABORATORIO PLACEHOLDER ====== */
+  #laboratorio-placeholder {
+    padding: 2rem; border-radius: 8px; text-align: center;
+    color: #7f8c8d; border: 2px dashed #7f8c8d;
+  }
+  
+  /* ====== SISTEMA DE VALORACIÓN ====== */
+  #sistema-valoracion { margin-top: 2rem; text-align: center; }
+  .estrellas {
+    font-size: 2.5rem; cursor: pointer; color: var(--blanco-nube);
+  }
+  .estrellas span {
+    transition: color .2s ease, transform .15s ease;
+    display: inline-block;
+  }
+  .estrellas span:hover { color: var(--amarillo-cibernetico); }
+  .estrellas span:active { transform: scale(0.95); }
+  
+  /* ====== FOOTER ====== */
+  footer { margin-top: 2rem; color: #7f8c8d; }
+  
+  /* ====== ARCHIVO (lista de retos) ====== */
+  .item-archivo {
+    background-color: var(--azul-espacio-profundo);
+    padding: 15px; margin-bottom: 10px; border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 10px;
+  }
+  .item-archivo .info { display: block; }
+  
+  /* ====== BOTONES ====== */
+  .boton-regenerar {
+    background-color: #e67e22; border: none; color: white;
+    padding: 8px 12px; border-radius: 5px; cursor: pointer;
+    font-weight: bold; font-family: var(--font-titulos);
+    transition: background-color .2s ease, transform .15s ease;
+  }
+  .boton-regenerar:hover { background-color: #d35400; }
+  .boton-regenerar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
+  .boton-regenerar:active { transform: translateY(1px); }
+  
+  /* ====== SHARING ====== */
+  .sharing-container {
+    margin-top: 2rem; text-align: center; padding-top: 1rem;
+    border-top: 1px solid var(--azul-espacio-profundo);
+  }
+  .sharing-container a {
+    background-color: var(--turquesa-vibrante); color: white;
+    padding: 10px 15px; border-radius: 5px; margin: 0 5px;
+    font-weight: bold; display: inline-block;
+    transition: background-color .2s ease, transform .15s ease;
+  }
+  .sharing-container a:hover { background-color: #16a085; }
+  .sharing-container a:active { transform: translateY(1px); }
+  
+  /* ====== ACCESIBILIDAD ====== */
+  a:focus, .boton-regenerar:focus, .estrellas span:focus {
+    outline: 2px solid var(--amarillo-cibernetico);
+    outline-offset: 3px;
+  }
+  .visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+  }
+  
+  /* ====== HERO DEL ENTRENADOR (DECEERRE) ====== */
+  .coach-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 1.5rem 0 0.5rem;
+    position: relative;
+  }
+  .coach-hero::after {
+    content: "";
+    position: absolute;
+    right: 0; top: -10px;
+    width: 180px; height: 180px;
+    background: radial-gradient(ellipse at center, rgba(26,188,156, 0.25), transparent 60%);
+    filter: blur(8px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .coach { position: relative; margin: 0; z-index: 1; }
+  
+  /* Avatar del entrenador (Deceerre) */
+  .coach__avatar {
+    display: block;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.25));
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.35),
+      0 0 0 4px rgba(255,255,255,0.06),
+      0 0 0 8px rgba(26,188,156,0.15);
+    filter: none; /* evita invertir al entrenador */
+    transform: translateZ(0);
+    animation: coach-bob 6s ease-in-out infinite;
+  }
+  
+  /* Distintivo divertido */
+  .coach__badge {
+    position: absolute;
+    right: -8px; bottom: -8px;
+    background: var(--turquesa-vibrante);
+    color: white;
+    border-radius: 999px;
+    padding: 6px 8px;
+    font-size: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+  
+  /* Burbuja del entrenador */
+  .coach__bubble {
+    position: absolute;
+    left: -14px; top: -14px;
+    transform: translate(-100%, 0);
+    max-width: 260px;
+    background: var(--azul-espacio-profundo);
+    color: var(--blanco-nube);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    font-size: 0.95rem;
+  }
+  .coach__bubble::after {
+    content: "";
+    position: absolute;
+    right: -8px; bottom: 18px;
+    border: 8px solid transparent;
+    border-left-color: var(--azul-espacio-profundo);
+  }
+  .coach__bubble strong {
+    display: block;
+    font-family: var(--font-titulos);
+    color: var(--amarillo-cibernetico);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  
+  /* Animación sutil */
+  @keyframes coach-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coach__avatar { animation: none; }
+  }
+  
+  /* Hover suave */
+  .coach:hover .coach__avatar {
+    transition: transform 250ms ease, box-shadow 250ms ease;
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 40px rgba(0,0,0,0.45),
+      0 0 0 4px rgba(255,255,255,0.08),
+      0 0 0 10px rgba(26,188,156,0.20);
+  }
+  
+  /* Responsive */
+  @media (max-width: 720px) {
+    .coach-hero {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+    .coach__bubble {
+      position: static;
+      transform: none;
+      margin-bottom: 10px;
+    }
+    .coach-hero::after { display: none; }
+  }
+  
+  /* Mantener inversión solo para el icono del reto, no para Deceerre */
+  #imagen-reto { filter: invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+  .coach__avatar { filter: none !important; }
+  
