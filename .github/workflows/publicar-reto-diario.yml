@@ -2,18 +2,18 @@ name: Publicar Reto Diario y Desplegar Web
 
 on:
   schedule:
-    # Se ejecuta a las 5:30 AM UTC, de Lunes a Viernes
     - cron: '30 5 * * 1-5'
-  workflow_dispatch: # Permite ejecutarlo manualmente
+  workflow_dispatch:
 
-# Permisos especiales para que el robot pueda desplegar en GitHub Pages
+# --- LA SOLUCIÓN ESTÁ AQUÍ ---
+# Este bloque de permisos es la llave que necesita el robot.
 permissions:
   contents: write
   pages: write
   id-token: write
+# -----------------------------
 
 jobs:
-  # TRABAJO 1: Preparar el reto del día
   preparar_reto:
     runs-on: ubuntu-latest
     steps:
@@ -47,9 +47,7 @@ jobs:
           git commit -m "🚀 Publicado el reto del día $(date +'%Y-%m-%d')"
           git push
 
-  # TRABAJO 2: Desplegar la web en GitHub Pages
   desplegar_web:
-    # Este trabajo solo se ejecuta después de que el anterior termine con éxito
     needs: preparar_reto
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +58,6 @@ jobs:
       - name: Subir artefactos de la web
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Sube todo el contenido del repositorio
+          path: '.'
       - name: Desplegar en GitHub Pages
         uses: actions/deploy-pages@v4
