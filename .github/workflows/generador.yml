@@ -29,7 +29,7 @@ jobs:
           COUNT_PER_CATEGORY: '2' 
         run: python reto_diario.py
 
-      - name: Guardar los retos generados
+      - name: Guardar lo retos generados
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
