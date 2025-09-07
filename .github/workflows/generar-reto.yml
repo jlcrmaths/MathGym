@@ -1,0 +1,77 @@
+name: Generar y publicar reto
+
+on:
+  # Programa de lunes a viernes (UTC). Ajusta la hora si lo necesitas.
+  schedule:
+    - cron: "5 6 * * 1-5"   # 06:05 UTC → 08:05 Madrid en verano
+  workflow_dispatch: {}      # Permite lanzarlo manualmente
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias (si existen)
+        run: |
+          if [ -f requirements.txt ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+          fi
+
+      # Corta la ejecución si es sábado (6) o domingo (7) en Europa/Madrid
+      - name: Salir si es fin de semana (Europa/Madrid)
+        run: |
+          DOW=$(TZ=Europe/Madrid date +%u)
+          if [ "$DOW" -gt 5 ]; then
+            echo "Es fin de semana (weekday=$DOW). No se genera reto."
+            exit 0
+          fi
+
+      - name: Ejecutar generador
+        run: |
+          set -e
+          # Asegura carpetas para evitar errores posteriores
+          mkdir -p public/retos
+          mkdir -p almacen_retos
+          python reto_diario.py
+
+      - name: Preparar cambios (si los hay)
+        id: changes
+        run: |
+          set -e
+          # Añade TODO el árbol; no falla si una carpeta está vacía
+          git add -A
+          # ¿Hay algo staged?
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit & push
+        if: ${{ steps.changes.outputs.has_changes == 'true' }}
+        run: |
+          set -e
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          DATE=$(TZ=Europe/Madrid date +%F)
+          git commit -m "feat(reto): actualización automática ${DATE}"
+          git push
+
+      # (Opcional) Despliegue a Firebase Hosting si tienes FIREBASE_TOKEN
+      - name: Deploy a Firebase Hosting
+        if: ${{ steps.changes.outputs.has_changes == 'true' && secrets.FIREBASE_TOKEN != '' }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          npm i -g firebase-tools
+          firebase deploy --only hosting --token "$FIREBASE_TOKEN"
