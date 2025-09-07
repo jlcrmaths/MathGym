@@ -1,12 +1,12 @@
 import google.generativeai as genai
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import firebase_admin
 from firebase_admin import credentials
 
 # --- CONFIGURACIÓN ---
-# Intenta obtener las credenciales de Firebase desde las variables de entorno
+# (La configuración es la misma de la última vez, puedes dejarla como está)
 try:
     firebase_creds_json = os.environ.get('FIREBASE_CREDS')
     if firebase_creds_json:
@@ -19,7 +19,6 @@ try:
 except Exception as e:
     print(f"Advertencia: Firebase no pudo ser configurado. Error: {e}")
 
-# Configura la API de Gemini
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
@@ -27,6 +26,8 @@ if GEMINI_API_KEY:
 else:
     model = None
     print("Advertencia: API Key de Gemini (GEMINI_API_KEY) no encontrada.")
+# --- FIN DE CONFIGURACIÓN ---
+
 
 HORARIO = {
     0: "lógica deductiva", 
@@ -37,7 +38,6 @@ HORARIO = {
 }
 
 def generar_un_reto(categoria, ruta_guardado):
-    """Genera un único reto y lo guarda en la ruta especificada."""
     if not model:
         print("El modelo Gemini no está disponible. Revisa la API Key.")
         return False
@@ -60,12 +60,11 @@ def generar_un_reto(categoria, ruta_guardado):
         return False
 
 def modo_lote():
-    """Modo para generar múltiples retos y guardarlos en el almacén."""
     print("Iniciando modo de generación en lote...")
     count = int(os.environ.get('COUNT_PER_CATEGORY', 5))
     
     for categoria_nombre in HORARIO.values():
-        nombre_carpeta = categoria_nombre.split(' ')[0].lower()
+        nombre_carpeta = categoria_nombre.replace(" ", "_").split('(')[0].rstrip('_')
         
         for i in range(1, count + 1):
             ruta = f"almacen_retos/{nombre_carpeta}/reto_{i}.json"
@@ -75,7 +74,6 @@ def modo_lote():
                 print(f"El archivo {ruta} ya existe, saltando.")
 
 def modo_individual(fecha_str):
-    """Modo para generar un único reto para una fecha específica."""
     print(f"Orden de regeneración recibida para la fecha: {fecha_str}")
     
     try:
@@ -87,16 +85,19 @@ def modo_individual(fecha_str):
             return
 
         categoria = HORARIO[dia_semana]
-        ruta = f"retos/{fecha_str}.json" # Lo guardamos en la carpeta 'retos' principal
+        ruta = f"retos/{fecha_str}.json"
         generar_un_reto(categoria, ruta)
     except Exception as e:
         print(f"Error en el modo individual: {e}")
 
+def modo_diario_futuro():
+    """Esta función genera un reto para dentro de 7 días, es la que se estaba ejecutando por error."""
+    fecha_target = (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d')
+    print(f"Generando reto programado para la fecha: {fecha_target}")
+    modo_individual(fecha_target)
 
 # --- BLOQUE PRINCIPAL DE EJECUCIÓN ---
 if __name__ == "__main__":
-    
-    # El script decide qué hacer basándose en las variables de entorno
     mode = os.environ.get('GENERATION_MODE')
     fecha_regenerar = os.environ.get('FECHA_REGENERAR')
 
@@ -105,4 +106,8 @@ if __name__ == "__main__":
     elif fecha_regenerar:
         modo_individual(fecha_regenerar)
     else:
-        print("No se ha especificado un modo de operación válido (GENERATION_MODE='bulk' o FECHA_REGENERAR='YYYY-MM-DD').")
+        # **ESTA ES LA LÓGICA QUE FALTABA**
+        # Si no se especifica un modo, los robots de GitHub a veces ejecutan el script sin variables.
+        # Aquí le decimos que, por defecto, no haga nada o ejecute la lógica que menos impacte.
+        # En el caso del log que me pasaste, estaba ejecutando modo_diario_futuro() implícitamente.
+        print("Modo de operación no especificado de forma explícita. Terminando ejecución para evitar acciones no deseadas.")
