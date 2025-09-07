@@ -1,87 +1,73 @@
 import google.generativeai as genai
 import json
-import random
 import os
 from datetime import datetime, timedelta
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials
 
 # --- CONFIGURACIÓN ---
-try:
-    firebase_creds_json = os.environ.get('FIREBASE_CREDS')
-    creds_dict = json.loads(firebase_creds_json)
-    cred = credentials.Certificate(creds_dict)
-    if not firebase_admin._apps:
-        firebase_admin.initialize_app(cred)
-    db = firestore.client()
-except Exception as e:
-    db = None
-    print(f"Advertencia: Firebase no configurado. Error: {e}")
+# (La configuración de Firebase y Gemini es la misma de antes)
 
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-pro')
-else:
-    model = None
-    print("Advertencia: API Key de Gemini no encontrada.")
+# ... (pega aquí la configuración de Firebase y Gemini de la guía anterior) ...
 
 HORARIO = {
-    0: "lógica deductiva (estilo Einstein)", 
-    1: "laboratorio virtual (trasvases de agua)", 
+    0: "lógica deductiva", 
+    1: "laboratorio virtual de trasvases", 
     2: "criptoaritmética", 
-    3: "laboratorio de secuencia (cruzar un río)", 
+    3: "secuencia lógica para cruzar un río", 
     4: "lógica lateral"
 }
-ICONOS = {
-    "lógica deductiva (estilo Einstein)": "table", 
-    "laboratorio virtual (trasvases de agua)": "bottle", 
-    "criptoaritmética": "math-symbols", 
-    "laboratorio de secuencia (cruzar un río)": "boat", 
-    "lógica lateral": "bulb"
-}
 
-def generar_reto(fecha_objetivo_str):
-    if not model:
-        print("El modelo Gemini no está configurado. Abortando.")
-        return
-
-    fecha_objetivo = datetime.strptime(fecha_objetivo_str, '%Y-%m-%d')
-    dia_semana = fecha_objetivo.weekday()
-    
-    if dia_semana not in HORARIO:
-        print(f"El {fecha_objetivo_str} es fin de semana. No se genera reto.")
-        return
-
-    categoria = HORARIO[dia_semana]
-    prompt = f"Actúa como un diseñador de puzzles. Crea un reto de lógica original y único sobre '{categoria}'. El reto debe ser interesante y no trivial. Devuelve la salida EXCLUSIVAMENTE en formato JSON con la siguiente estructura: {{\"titulo\": \"Un título muy llamativo y corto para el reto\", \"objetivo\": \"Una descripción clara y concisa de la meta final que el usuario debe alcanzar\", \"elementos_interactivos\": [], \"condicion_victoria\": \"El estado exacto que determina que el reto se ha superado\"}}"
+def generar_un_reto(categoria, ruta_guardado):
+    """Genera un único reto y lo guarda en la ruta especificada."""
+    print(f"Generando reto para la categoría: {categoria}...")
+    prompt = f"Crea un reto de lógica original sobre '{categoria}'. Devuelve EXCLUSIVAMENTE en formato JSON con la siguiente estructura: {{\"titulo\": \"...\", \"objetivo\": \"...\"}}"
     
     try:
         response = model.generate_content(prompt)
         reto_json = json.loads(response.text.replace("```json", "").replace("```", "").strip())
-        reto_json["fecha"] = fecha_objetivo_str
-        icono_tag = ICONOS.get(categoria, "question-mark")
-        reto_json["icono_url"] = f"https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/svg/{icono_tag}.svg"
-
-        if not os.path.exists('retos'): os.makedirs('retos')
-        nombre_archivo = f"retos/{fecha_objetivo_str}.json"
-        with open(nombre_archivo, "w", encoding="utf-8") as f: json.dump(reto_json, f, ensure_ascii=False, indent=2)
-        print(f"✅ Reto futuro guardado en {nombre_archivo}")
-
-        if db:
-            doc_ref = db.collection('retos').document(fecha_objetivo_str)
-            doc_ref.set({'titulo': reto_json['titulo'], 'categoria': categoria, 'visitas': 0, 'suma_valoraciones': 0, 'numero_votos': 0}, merge=True)
-            print(f"✅ Entrada futura preparada en Firebase.")
+        
+        # Crear directorio si no existe
+        os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
+        
+        with open(ruta_guardado, "w", encoding="utf-8") as f:
+            json.dump(reto_json, f, ensure_ascii=False, indent=2)
+        print(f"✅ Reto guardado en {ruta_guardado}")
+        return True
     except Exception as e:
-        print(f"❌ Error total en la generación: {e}")
+        print(f"❌ Error generando un reto: {e}")
+        return False
+
+def modo_lote():
+    """Modo para generar múltiples retos y guardarlos en el almacén."""
+    print("Iniciando modo de generación en lote...")
+    # Leemos cuántos retos generar por categoría desde la variable de entorno
+    count = int(os.environ.get('COUNT_PER_CATEGORY', 5))
+    
+    for categoria_nombre in HORARIO.values():
+        # Creamos un nombre de carpeta válido (ej: 'logica_deductiva')
+        nombre_carpeta = categoria_nombre.split(' ')[0].lower()
+        
+        for i in range(1, count + 1):
+            ruta = f"almacen_retos/{nombre_carpeta}/reto_{i}.json"
+            if not os.path.exists(ruta):
+                generar_un_reto(categoria_nombre, ruta)
+            else:
+                print(f"El archivo {ruta} ya existe, saltando.")
+
+def modo_diario():
+    """Modo para generar un único reto para el futuro (lógica original)."""
+    print("Iniciando modo de generación diario...")
+    # (Esta función ahora es menos importante, pero la mantenemos por si acaso)
+    # Lógica para generar un solo reto para dentro de 7 días...
+
 
 if __name__ == "__main__":
-    fecha_input = os.environ.get('FECHA_REGENERAR')
-    if fecha_input:
-        fecha_target = fecha_input
-        print(f"Orden de regeneración recibida para la fecha: {fecha_target}")
+    # El script decide qué hacer basándose en la variable de entorno
+    mode = os.environ.get('GENERATION_MODE')
+
+    if mode == 'bulk':
+        modo_lote()
     else:
-        fecha_target = (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d')
-        print(f"Generando reto programado para la fecha: {fecha_target}")
-    
-    generar_reto(fecha_target)
+        # Por defecto, o si no se especifica, no haría nada o podrías poner el modo_diario()
+        print("Modo no especificado o no reconocido. Terminando script.")
