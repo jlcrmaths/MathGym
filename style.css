@@ -1,254 +1,283 @@
 :root {
-    --azul-espacio-profundo: #1e2a3a;
-    --azul-pizarra: #2c3e50;
-    --blanco-nube: #ecf0f1;
-    --amarillo-cibernetico: #f1c40f;
+    --bg-grad-1: #0f1724;                 /* Fondo base más limpio */
+    --bg-grad-2: #1e2a3a;                 /* Degradado sutil */
+    --azul-espacio-profundo: #1e2a3a;     /* Conservamos tu paleta */
+    --azul-pizarra: #243447;              /* Un poco más legible que #2c3e50 */
+    --blanco-nube: #f5f7fa;               /* Blanco más cálido para contraste */
+    --gris-300: #cfd8e3;
+    --gris-500: #9aa4b2;
+    --gris-700: #5b6470;
+  
+    --amarillo-cibernetico: #f6c90e;      /* Un amarillo más vivo y menos ‘mostaza’ */
     --turquesa-vibrante: #1abc9c;
-    --font-titulos: 'Poppins', sans-serif;
-    --font-textos: 'Lato', sans-serif;
+  
+    --ring: #f6c90e;
+  
+    --font-titulos: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --font-textos: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+  
+    --shadow-1: 0 8px 24px rgba(0,0,0,0.25);
+    --shadow-2: 0 14px 40px rgba(0,0,0,0.35);
+  
+    --container: 920px;
+  
+    /* Escala de espacios */
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
   }
   
   /* ====== BASE ====== */
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
-    font-family: var(--font-textos);
-    background-color: var(--azul-espacio-profundo);
+    margin: 0;
     color: var(--blanco-nube);
+    font-family: var(--font-textos);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Fondo con degradado sutil y textura */
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(26,188,156,0.12), transparent 60%),
+      radial-gradient(900px 600px at -10% 90%, rgba(246,201,14,0.12), transparent 60%),
+      linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2));
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 1rem;
+    padding: var(--space-6);
   }
+  
+  h1, h2, h3 { font-family: var(--font-titulos); margin: 0 0 .5rem 0; }
   a { color: var(--turquesa-vibrante); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  header, footer { text-align: center; }
-  h1, h2 { font-family: var(--font-titulos); margin: 0 0 .5rem 0; }
+  img { max-width: 100%; display: block; }
   
-  /* ====== LOGO / CABECERA ====== */
+  /* ====== CABECERA (LOGO + TÍTULO) ====== */
   .logo-container {
     display: flex; align-items: center; justify-content: center;
-    gap: 15px; margin-bottom: 20px;
+    gap: var(--space-4); margin-bottom: var(--space-6);
   }
   .logo-mascota {
-    width: 54px; height: 54px;
-    border-radius: 50%; object-fit: cover;
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
     background: rgba(255,255,255,0.06);
     box-shadow: 0 4px 14px rgba(0,0,0,0.35);
     padding: 4px;
   }
-  .logo-container h1 { font-size: 2.5rem; color: var(--amarillo-cibernetico); }
-  
-  /* ====== CONTENEDORES ====== */
-  #contenedor-juego, .contenedor-preprod, .contenedor-archivo {
-    background-color: var(--azul-pizarra);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 20px;
+  .logo-container h1 {
+    font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+    letter-spacing: .5px;
+    color: var(--amarillo-cibernetico);
+    text-shadow: 0 2px 16px rgba(246,201,14,0.22);
   }
-  header h2 { margin-top: 0; color: var(--turquesa-vibrante); }
   
-  /* ====== IMAGEN DEL RETO ====== */
-  .imagen-container { margin: 20px 0; text-align: center; }
+  /* ====== CONTENEDOR PRINCIPAL ====== */
+  #contenedor-juego,
+  .contenedor-preprod,
+  .contenedor-archivo {
+    width: 100%;
+    max-width: var(--container);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: var(--radius-lg);
+    padding: clamp(1rem, 2.4vw, 2rem);
+    box-shadow: var(--shadow-1);
+  }
+  header { text-align: center; }
+  header h2 {
+    color: var(--blanco-nube);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    margin-bottom: .25rem;
+  }
+  #objetivo-reto {
+    color: var(--gris-300);
+    margin: 0;
+    font-size: clamp(.95rem, 1.6vw, 1.05rem);
+  }
+  
+  /* ====== HERO ENTRENADOR (DECEERRE) ====== */
+  .visually-hidden {
+    position: absolute !important; 
+    height: 1px; width: 1px; 
+    overflow: hidden; 
+    clip: rect(1px, 1px, 1px, 1px); 
+    white-space: nowrap;
+  }
+  
+  .coach-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-6);
+    margin: var(--space-6) 0 var(--space-4);
+    position: relative;
+  }
+  
+  .coach {
+    position: relative; margin: 0; z-index: 1;
+  }
+  .coach__avatar {
+    width: 168px; height: 168px; border-radius: 50%; object-fit: cover;
+    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.25));
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.35),
+      0 0 0 4px rgba(255,255,255,0.06),
+      0 0 0 8px rgba(26,188,156,0.18);
+    filter: none !important; /* que no le afecten filtros de otros elementos */
+    transform: translateZ(0);
+    animation: coach-bob 7s ease-in-out infinite;
+  }
+  .coach__badge {
+    position: absolute; right: -8px; bottom: -8px;
+    background: var(--turquesa-vibrante); color: white;
+    border-radius: 999px; padding: 6px 8px; font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+  .coach__bubble {
+    position: absolute;
+    left: -14px; top: -14px; transform: translate(-100%, 0);
+    max-width: 280px;
+    background: #111826; /* un poco más oscuro que el card para destacar */
+    color: var(--blanco-nube);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    box-shadow: var(--shadow-2);
+    font-size: .98rem;
+  }
+  .coach__bubble::after {
+    content: "";
+    position: absolute; right: -8px; bottom: 18px;
+    border: 8px solid transparent;
+    border-left-color: #111826;
+  }
+  .coach__bubble strong {
+    font-family: var(--font-titulos);
+    color: var(--amarillo-cibernetico);
+    font-size: .98rem; display: block; margin-bottom: 4px;
+  }
+  
+  /* Animación sutil */
+  @keyframes coach-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+  @media (prefers-reduced-motion: reduce) { .coach__avatar { animation: none; } }
+  .coach:hover .coach__avatar {
+    transition: transform .25s ease, box-shadow .25s ease;
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 44px rgba(0,0,0,0.45),
+      0 0 0 4px rgba(255,255,255,0.08),
+      0 0 0 10px rgba(26,188,156,0.22);
+  }
+  
+  /* ====== ICONO DEL RETO ====== */
+  .imagen-container { margin: var(--space-6) 0 var(--space-4); text-align: center; }
   #imagen-reto {
-    filter: invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.3));
-    max-width: 100px;
+    max-width: 104px;
+    filter: invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.25));
   }
   
   /* ====== INFO (visitas / valoración) ====== */
   #info-reto {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 10px; background-color: var(--azul-espacio-profundo);
-    border-radius: 8px; margin: 20px 0; color: #bdc3c7;
+    gap: var(--space-4);
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    color: var(--gris-300);
   }
   
   /* ====== LABORATORIO PLACEHOLDER ====== */
   #laboratorio-placeholder {
-    padding: 2rem; border-radius: 8px; text-align: center;
-    color: #7f8c8d; border: 2px dashed #7f8c8d;
+    padding: var(--space-8);
+    border-radius: var(--radius-md);
+    text-align: center;
+    color: var(--gris-500);
+    border: 2px dashed rgba(255,255,255,0.15);
   }
   
-  /* ====== SISTEMA DE VALORACIÓN ====== */
-  #sistema-valoracion { margin-top: 2rem; text-align: center; }
+  /* ====== VALORACIÓN ====== */
+  #sistema-valoracion { margin-top: var(--space-8); text-align: center; }
+  #sistema-valoracion p { margin-top: 0; color: var(--gris-300); }
   .estrellas {
-    font-size: 2.5rem; cursor: pointer; color: var(--blanco-nube);
+    font-size: clamp(2rem, 3.6vw, 2.6rem);
+    cursor: pointer; color: var(--blanco-nube);
+    user-select: none;
   }
   .estrellas span {
-    transition: color .2s ease, transform .15s ease;
     display: inline-block;
+    transition: color .2s ease, transform .12s ease, filter .2s ease;
+    padding: 0 .05em;
   }
-  .estrellas span:hover { color: var(--amarillo-cibernetico); }
+  .estrellas span:hover { color: var(--amarillo-cibernetico); filter: drop-shadow(0 2px 10px rgba(246,201,14,0.25)); }
   .estrellas span:active { transform: scale(0.95); }
   
-  /* ====== FOOTER ====== */
-  footer { margin-top: 2rem; color: #7f8c8d; }
-  
-  /* ====== ARCHIVO (lista de retos) ====== */
-  .item-archivo {
-    background-color: var(--azul-espacio-profundo);
-    padding: 15px; margin-bottom: 10px; border-radius: 8px;
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 10px;
-  }
-  .item-archivo .info { display: block; }
-  
-  /* ====== BOTONES ====== */
+  /* ====== BOTONES / ENLACES DE ACCIÓN ====== */
   .boton-regenerar {
     background-color: #e67e22; border: none; color: white;
-    padding: 8px 12px; border-radius: 5px; cursor: pointer;
-    font-weight: bold; font-family: var(--font-titulos);
-    transition: background-color .2s ease, transform .15s ease;
+    padding: 10px 14px; border-radius: var(--radius-sm); cursor: pointer;
+    font-weight: 700; font-family: var(--font-titulos);
+    transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease;
+    box-shadow: 0 6px 16px rgba(230,126,34,0.22);
   }
   .boton-regenerar:hover { background-color: #d35400; }
-  .boton-regenerar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
   .boton-regenerar:active { transform: translateY(1px); }
+  .boton-regenerar:disabled { background-color: #7f8c8d; cursor: not-allowed; box-shadow: none; }
   
-  /* ====== SHARING ====== */
+  /* ====== COMPARTIR ====== */
   .sharing-container {
-    margin-top: 2rem; text-align: center; padding-top: 1rem;
-    border-top: 1px solid var(--azul-espacio-profundo);
+    margin-top: var(--space-8); text-align: center; padding-top: var(--space-4);
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
   .sharing-container a {
-    background-color: var(--turquesa-vibrante); color: white;
-    padding: 10px 15px; border-radius: 5px; margin: 0 5px;
-    font-weight: bold; display: inline-block;
-    transition: background-color .2s ease, transform .15s ease;
+    background-color: var(--turquesa-vibrante);
+    color: #061317;
+    padding: 10px 15px;
+    border-radius: var(--radius-sm);
+    margin: 0 6px;
+    font-weight: 800;
+    display: inline-block;
+    box-shadow: 0 6px 16px rgba(26,188,156,0.22);
+    transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease;
   }
-  .sharing-container a:hover { background-color: #16a085; }
-  .sharing-container a:active { transform: translateY(1px); }
+  .sharing-container a:hover { background-color: #16a085; transform: translateY(-1px); }
+  .sharing-container a:active { transform: translateY(0); }
+  
+  /* ====== LISTA ARCHIVO ====== */
+  .item-archivo {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: var(--radius-md);
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .item-archivo .info small { color: var(--gris-500); }
   
   /* ====== ACCESIBILIDAD ====== */
   a:focus, .boton-regenerar:focus, .estrellas span:focus {
-    outline: 2px solid var(--amarillo-cibernetico);
+    outline: 2px solid var(--ring);
     outline-offset: 3px;
-  }
-  .visually-hidden {
-    position: absolute !important;
-    height: 1px; width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
+    border-radius: 6px;
   }
   
-  /* ====== HERO DEL ENTRENADOR (DECEERRE) ====== */
-  .coach-hero {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 1.25rem;
-    margin: 1.5rem 0 0.5rem;
-    position: relative;
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 860px) {
+    body { padding: var(--space-4); }
+    .coach-hero { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .coach__bubble { position: static; transform: none; margin-bottom: var(--space-4); }
   }
-  .coach-hero::after {
-    content: "";
-    position: absolute;
-    right: 0; top: -10px;
-    width: 180px; height: 180px;
-    background: radial-gradient(ellipse at center, rgba(26,188,156, 0.25), transparent 60%);
-    filter: blur(8px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .coach { position: relative; margin: 0; z-index: 1; }
-  
-  /* Avatar del entrenador (Deceerre) */
-  .coach__avatar {
-    display: block;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.25));
-    box-shadow:
-      0 10px 30px rgba(0,0,0,0.35),
-      0 0 0 4px rgba(255,255,255,0.06),
-      0 0 0 8px rgba(26,188,156,0.15);
-    filter: none; /* evita invertir al entrenador */
-    transform: translateZ(0);
-    animation: coach-bob 6s ease-in-out infinite;
-  }
-  
-  /* Distintivo divertido */
-  .coach__badge {
-    position: absolute;
-    right: -8px; bottom: -8px;
-    background: var(--turquesa-vibrante);
-    color: white;
-    border-radius: 999px;
-    padding: 6px 8px;
-    font-size: 1rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    border: 2px solid rgba(255,255,255,0.15);
-  }
-  
-  /* Burbuja del entrenador */
-  .coach__bubble {
-    position: absolute;
-    left: -14px; top: -14px;
-    transform: translate(-100%, 0);
-    max-width: 260px;
-    background: var(--azul-espacio-profundo);
-    color: var(--blanco-nube);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 10px 12px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-    font-size: 0.95rem;
-  }
-  .coach__bubble::after {
-    content: "";
-    position: absolute;
-    right: -8px; bottom: 18px;
-    border: 8px solid transparent;
-    border-left-color: var(--azul-espacio-profundo);
-  }
-  .coach__bubble strong {
-    display: block;
-    font-family: var(--font-titulos);
-    color: var(--amarillo-cibernetico);
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-  }
-  
-  /* Animación sutil */
-  @keyframes coach-bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .coach__avatar { animation: none; }
-  }
-  
-  /* Hover suave */
-  .coach:hover .coach__avatar {
-    transition: transform 250ms ease, box-shadow 250ms ease;
-    transform: translateY(-2px);
-    box-shadow:
-      0 16px 40px rgba(0,0,0,0.45),
-      0 0 0 4px rgba(255,255,255,0.08),
-      0 0 0 10px rgba(26,188,156,0.20);
-  }
-  
-  /* Responsive */
-  @media (max-width: 720px) {
-    .coach-hero {
-      grid-template-columns: 1fr;
-      justify-items: center;
-      text-align: center;
-    }
-    .coach__bubble {
-      position: static;
-      transform: none;
-      margin-bottom: 10px;
-    }
-    .coach-hero::after { display: none; }
-  }
-  
-  /* Mantener inversión solo para el icono del reto, no para Deceerre */
-  #imagen-reto { filter: invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
-  .coach__avatar { filter: none !important; }
-  
+  /* ====== RESPONSIVE ====== */
