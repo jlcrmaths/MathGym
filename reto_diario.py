@@ -1,113 +1,58 @@
-import google.generativeai as genai
-import json
 import os
-from datetime import datetime, timedelta
-import firebase_admin
-from firebase_admin import credentials
+import shutil
+from datetime import datetime
 
-# --- CONFIGURACIÓN ---
-# (La configuración es la misma de la última vez, puedes dejarla como está)
-try:
-    firebase_creds_json = os.environ.get('FIREBASE_CREDS')
-    if firebase_creds_json:
-        creds_dict = json.loads(firebase_creds_json)
-        cred = credentials.Certificate(creds_dict)
-        if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred)
-    else:
-        print("Advertencia: Variable FIREBASE_CREDS no encontrada.")
-except Exception as e:
-    print(f"Advertencia: Firebase no pudo ser configurado. Error: {e}")
-
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-pro')
-else:
-    model = None
-    print("Advertencia: API Key de Gemini (GEMINI_API_KEY) no encontrada.")
-# --- FIN DE CONFIGURACIÓN ---
-
-
+# Define las categorías para cada día de la semana (Lunes=0, Martes=1, etc.)
 HORARIO = {
-    0: "lógica deductiva", 
-    1: "laboratorio virtual de trasvases", 
-    2: "criptoaritmética", 
-    3: "secuencia lógica para cruzar un río", 
-    4: "lógica lateral"
+    0: "logica_deductiva",
+    1: "laboratorio_virtual",
+    2: "criptoaritmetica",
+    3: "secuencia_logica",
+    4: "logica_lateral"
 }
 
-def generar_un_reto(categoria, ruta_guardado):
-    if not model:
-        print("El modelo Gemini no está disponible. Revisa la API Key.")
-        return False
-        
-    print(f"Generando reto para la categoría: {categoria}...")
-    prompt = f"Crea un reto de lógica original sobre '{categoria}'. Devuelve EXCLUSIVAMENTE en formato JSON con la siguiente estructura: {{\"titulo\": \"...\", \"objetivo\": \"...\"}}"
+def publicar_reto_diario():
+    """
+    Coge un reto del almacén, lo publica como reto.json y lo mueve al histórico.
+    """
+    # 1. Averiguar qué día es y qué categoría toca
+    hoy = datetime.now()
+    dia_semana = hoy.weekday() # Lunes es 0, Martes 1...
+
+    # Si es fin de semana, no hace nada
+    if dia_semana not in HORARIO:
+        print(f"Hoy es fin de semana ({dia_semana}). No se publica nada.")
+        return
+
+    nombre_categoria = HORARIO[dia_semana]
+    ruta_categoria = os.path.join("almacen_retos", nombre_categoria)
+    print(f"Hoy es {dia_semana}, toca la categoría: {nombre_categoria}")
+
+    # 2. Comprobar si quedan retos en el almacén para esa categoría
+    if not os.path.exists(ruta_categoria) or not os.listdir(ruta_categoria):
+        print(f"⚠️ ¡Alerta! No quedan retos en el almacén para la categoría '{nombre_categoria}'.")
+        # Aquí podrías añadir una notificación por email si quisieras
+        return
+
+    # 3. Coger el primer reto disponible
+    retos_disponibles = sorted(os.listdir(ruta_categoria))
+    nombre_reto_a_publicar = retos_disponibles[0]
+    ruta_origen = os.path.join(ruta_categoria, nombre_reto_a_publicar)
     
-    try:
-        response = model.generate_content(prompt)
-        reto_json = json.loads(response.text.replace("```json", "").replace("```", "").strip())
-        
-        os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
-        
-        with open(ruta_guardado, "w", encoding="utf-8") as f:
-            json.dump(reto_json, f, ensure_ascii=False, indent=2)
-        print(f"✅ Reto guardado en {ruta_guardado}")
-        return True
-    except Exception as e:
-        print(f"❌ Error generando un reto desde la API: {e}")
-        return False
+    # 4. Copiarlo a la raíz como "reto.json"
+    ruta_destino_publico = "reto.json"
+    shutil.copy(ruta_origen, ruta_destino_publico)
+    print(f"✅ Reto '{nombre_reto_a_publicar}' copiado a '{ruta_destino_publico}'.")
 
-def modo_lote():
-    print("Iniciando modo de generación en lote...")
-    count = int(os.environ.get('COUNT_PER_CATEGORY', 5))
-    
-    for categoria_nombre in HORARIO.values():
-        nombre_carpeta = categoria_nombre.replace(" ", "_").split('(')[0].rstrip('_')
-        
-        for i in range(1, count + 1):
-            ruta = f"almacen_retos/{nombre_carpeta}/reto_{i}.json"
-            if not os.path.exists(ruta):
-                generar_un_reto(categoria_nombre, ruta)
-            else:
-                print(f"El archivo {ruta} ya existe, saltando.")
+    # 5. Mover el reto usado a un archivo histórico con la fecha de hoy
+    # Esto evita que se vuelva a usar y sirve de registro
+    os.makedirs("retos_publicados", exist_ok=True)
+    fecha_hoy_str = hoy.strftime('%Y-%m-%d')
+    ruta_historico = os.path.join("retos_publicados", f"{fecha_hoy_str}.json")
+    shutil.move(ruta_origen, ruta_historico)
+    print(f"✅ Reto movido a '{ruta_historico}'.")
 
-def modo_individual(fecha_str):
-    print(f"Orden de regeneración recibida para la fecha: {fecha_str}")
-    
-    try:
-        fecha_objetivo = datetime.strptime(fecha_str, '%Y-%m-%d')
-        dia_semana = fecha_objetivo.weekday()
-
-        if dia_semana not in HORARIO:
-            print(f"El {fecha_str} es fin de semana. No se genera reto.")
-            return
-
-        categoria = HORARIO[dia_semana]
-        ruta = f"retos/{fecha_str}.json"
-        generar_un_reto(categoria, ruta)
-    except Exception as e:
-        print(f"Error en el modo individual: {e}")
-
-def modo_diario_futuro():
-    """Esta función genera un reto para dentro de 7 días, es la que se estaba ejecutando por error."""
-    fecha_target = (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d')
-    print(f"Generando reto programado para la fecha: {fecha_target}")
-    modo_individual(fecha_target)
-
-# --- BLOQUE PRINCIPAL DE EJECUCIÓN ---
 if __name__ == "__main__":
-    mode = os.environ.get('GENERATION_MODE')
-    fecha_regenerar = os.environ.get('FECHA_REGENERAR')
-
-    if mode == 'bulk':
-        modo_lote()
-    elif fecha_regenerar:
-        modo_individual(fecha_regenerar)
-    else:
-        # **ESTA ES LA LÓGICA QUE FALTABA**
-        # Si no se especifica un modo, los robots de GitHub a veces ejecutan el script sin variables.
-        # Aquí le decimos que, por defecto, no haga nada o ejecute la lógica que menos impacte.
-        # En el caso del log que me pasaste, estaba ejecutando modo_diario_futuro() implícitamente.
-        print("Modo de operación no especificado de forma explícita. Terminando ejecución para evitar acciones no deseadas.")
+    print("Iniciando script de publicación...")
+    publicar_reto_diario()
+    print("Script de publicación finalizado.")

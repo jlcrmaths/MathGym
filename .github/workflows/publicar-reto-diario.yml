@@ -1,0 +1,40 @@
+name: Publicar Reto Diario
+
+on:
+  # Se activa de Lunes a Viernes a las 06:05 UTC (08:05 en España en verano)
+  schedule:
+    - cron: "5 6 * * 1-5"
+  
+  # Permite activarlo manualmente desde la pestaña "Actions" de GitHub
+  workflow_dispatch: {}
+
+jobs:
+  publicar-reto:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Descarga el código de tu repositorio
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      # 2. Ejecuta el script de Python para que haga la lógica
+      - name: Ejecutar la lógica de publicación
+        run: python3 reto_diario.py
+        env:
+          # Los secretos se pasan al script de forma segura
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FIREBASE_CREDS: ${{ secrets.FIREBASE_CREDS }}
+      
+      # 3. Sube los cambios (el nuevo reto.json y el reto movido)
+      - name: Guardar y subir los cambios si existen
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Comprueba si hay algún cambio. Si no hay, no hace nada.
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No hay cambios para subir."
+          else
+            git add .
+            git commit -m "🚀 Reto del día publicado automáticamente"
+            git push
+          fi
