@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Cortex Diario - Preproducción</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Preproducción — MathGym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Revisa los retos pendientes antes de publicarlos.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="logo-container">
-        <img src="assets/deceerre.png" alt="Mascota Deceerre" class="logo-mascota">
-        <h1>Cortex Diario</h1>
-    </div>
-    <div class="contenedor-preprod">
-        <header>
-            <h2>🔬 Entorno de Preproducción</h2>
-            <p>Aquí puedes ver y validar los retos que se publicarán en los próximos 7 días.</p>
-        </header>
-        <main id="lista-preproduccion"></main>
-    </div>
-    <script src="preproduccion.js"></script>
+  <div class="logo-container">
+    <img src="assets/deceerre-pensando.png" alt="Deceerre" class="logo-mascota">
+    <h1>Preproducción</h1>
+  </div>
+
+  <main class="contenedor-reto">
+    <section>
+      <h2>Retos pendientes</h2>
+      <div id="lista-pendientes">
+        <p>Cargando retos...</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Exportar decisiones</h3>
+      <button id="exportar-json">📤 Descargar decisiones_preprod.json</button>
+    </section>
+
+    <nav class="navegacion-secundaria">
+      <a href="index.html">🏠 Reto del día</a>
+      <a href="archivo.html">🗂️ Archivo de Retos</a>
+    </nav>
+  </main>
+
+  <script src="preproduccion.js"></script>
 </body>
 </html>

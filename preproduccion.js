@@ -1,94 +1,101 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const contenedor = document.getElementById('lista-preproduccion');
-
-    fetch('lista_retos.json')
-        .then(response => {
-            if (!response.ok) { throw new Error('No se pudo cargar la lista de retos.'); }
-            return response.json();
-        })
-        .then(retos => {
-            const hoy = new Date();
-            hoy.setHours(0, 0, 0, 0);
-
-            const retosFuturos = retos.filter(reto => new Date(reto.fecha) > hoy)
-                                      .sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
-
-            if (retosFuturos.length === 0) {
-                contenedor.innerHTML = '<div class="item-archivo"><p>No hay retos futuros programados.</p></div>';
-                return;
-            }
-
-            const listaHTML = retosFuturos.map(reto => `
-                <div class="item-archivo">
-                    <span>${reto.fecha}</span>
-                    <span>${reto.titulo}</span>
-                    <button class="boton-regenerar" data-fecha="${reto.fecha}">Regenerar 🔄</button>
-                </div>
-            `).join('');
-            contenedor.innerHTML = listaHTML;
-
-            document.querySelectorAll('.boton-regenerar').forEach(boton => {
-                boton.addEventListener('click', () => {
-                    const fecha = boton.dataset.fecha;
-                    if (confirm(`¿Seguro que quieres borrar y regenerar el reto del día ${fecha}?`)) {
-                        regenerarReto(fecha, boton);
-                    }
-                });
-            });
-        })
-        .catch(error => {
-            contenedor.innerHTML = '<div class="item-archivo"><p>El archivo de retos está vacío o no se ha generado aún.</p></div>';
-            console.error(error);
+document.addEventListener("DOMContentLoaded", () => {
+    const contenedor = document.getElementById("lista-pendientes");
+    const botonExportar = document.getElementById("exportar-json");
+    const ruta = "lista_pendientes.json";
+    const decisiones = [];
+  
+    fetch(ruta)
+      .then(r => r.ok ? r.json() : Promise.reject(new Error("No se pudo cargar lista_pendientes.json")))
+      .then(lista => {
+        if (!Array.isArray(lista) || lista.length === 0) {
+          contenedor.innerHTML = "<p>No hay retos pendientes.</p>";
+          return;
+        }
+  
+        const fragmento = document.createDocumentFragment();
+  
+        lista.forEach(reto => {
+          const bloque = document.createElement("div");
+          bloque.className = "bloque-reto";
+          bloque.style.border = "1px solid #ccc";
+          bloque.style.borderRadius = "8px";
+          bloque.style.padding = "12px";
+          bloque.style.marginBottom = "12px";
+          bloque.style.background = "#fff";
+  
+          const titulo = document.createElement("h3");
+          titulo.textContent = `${reto.fecha} — ${reto.titulo}`;
+          bloque.appendChild(titulo);
+  
+          const botones = document.createElement("div");
+          botones.style.display = "flex";
+          botones.style.gap = "10px";
+  
+          const aprobar = document.createElement("button");
+          aprobar.textContent = "✅ Aprobar";
+          aprobar.style.background = "#2ecc71";
+          aprobar.style.color = "#fff";
+          aprobar.style.border = "none";
+          aprobar.style.padding = "6px 12px";
+          aprobar.style.borderRadius = "6px";
+          aprobar.style.cursor = "pointer";
+  
+          const rechazar = document.createElement("button");
+          rechazar.textContent = "❌ Rechazar";
+          rechazar.style.background = "#e74c3c";
+          rechazar.style.color = "#fff";
+          rechazar.style.border = "none";
+          rechazar.style.padding = "6px 12px";
+          rechazar.style.borderRadius = "6px";
+          rechazar.style.cursor = "pointer";
+  
+          aprobar.addEventListener("click", () => {
+            decisiones.push({ fecha: reto.fecha, estado: "aprobado" });
+            bloquearBotones(aprobar, rechazar);
+          });
+  
+          rechazar.addEventListener("click", () => {
+            decisiones.push({ fecha: reto.fecha, estado: "rechazado" });
+            bloquearBotones(aprobar, rechazar);
+          });
+  
+          botones.appendChild(aprobar);
+          botones.appendChild(rechazar);
+          bloque.appendChild(botones);
+          fragmento.appendChild(bloque);
         });
-});
-
-function regenerarReto(fecha, boton) {
-    boton.disabled = true;
-    boton.textContent = 'Regenerando...';
-
-    const GITHUB_PAT = localStorage.getItem('GITHUB_PAT');
-    if (!GITHUB_PAT) {
-        const token = prompt("Para regenerar, pega tu GitHub Personal Access Token aquí (se guardará en tu navegador para futuras regeneraciones):");
-        if (token) {
-            localStorage.setItem('GITHUB_PAT', token);
-            regenerarReto(fecha, boton); // Volver a intentar
-        } else {
-            boton.disabled = false;
-            boton.textContent = 'Regenerar 🔄';
-        }
+  
+        contenedor.innerHTML = "";
+        contenedor.appendChild(fragmento);
+      })
+      .catch(err => {
+        console.error("Error al cargar retos pendientes:", err);
+        contenedor.innerHTML = "<p>Error al cargar los retos pendientes.</p>";
+      });
+  
+    botonExportar.addEventListener("click", () => {
+      if (decisiones.length === 0) {
+        alert("No has tomado ninguna decisión todavía.");
         return;
-    }
-    
-    // ⬇️ ¡IMPORTANTE! CAMBIA ESTO A TU USUARIO Y NOMBRE DE REPOSITORIO ⬇️
-    const REPO_URL = "tu_usuario/tu_repositorio"; 
-
-    fetch(`https://api.github.com/repos/${REPO_URL}/actions/workflows/generate-future-challenge.yml/dispatches`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `token ${GITHUB_PAT}`,
-            'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-            ref: 'develop',
-            inputs: {
-                fecha_regenerar: fecha
-            }
-        })
-    })
-    .then(response => {
-        if (response.status === 204) {
-            alert(`✅ ¡Orden de regeneración enviada para el reto del ${fecha}! La web se actualizará en unos minutos.`);
-            boton.textContent = '¡Orden Enviada!';
-        } else {
-            alert('❌ Error al enviar la orden. Revisa la consola para más detalles.');
-            boton.disabled = false;
-            boton.textContent = 'Regenerar 🔄';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error de red. Revisa la consola.');
-        boton.disabled = false;
-        boton.textContent = 'Regenerar 🔄';
+      }
+  
+      const blob = new Blob([JSON.stringify(decisiones, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement("a");
+      enlace.href = url;
+      enlace.download = "decisiones_preprod.json";
+      document.body.appendChild(enlace);
+      enlace.click();
+      document.body.removeChild(enlace);
+      URL.revokeObjectURL(url);
     });
-}
+  
+    function bloquearBotones(...botones) {
+      botones.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = "0.6";
+        btn.style.cursor = "default";
+      });
+    }
+  });
+  

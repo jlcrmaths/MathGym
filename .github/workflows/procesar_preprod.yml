@@ -1,0 +1,41 @@
+name: Procesar decisiones de preproducción
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  procesar_decisiones:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name 'Mathgym Bot'
+          git config --global user.email 'actions@github.com'
+
+      - name: Procesar decisiones
+        run: |
+          mkdir -p approved rejected
+          for file in almacen_retos/*.json; do
+            [ -e "$file" ] || continue
+            FECHA=$(jq -r '.fecha' "$file")
+            ESTADO=$(jq -r --arg fecha "$FECHA" '.[] | select(.fecha == $fecha) | .estado' decisiones_preprod.json)
+            if [ "$ESTADO" = "aprobado" ]; then
+              mv "$file" "approved/$FECHA.json"
+              echo "✅ Aprobado: $FECHA"
+            elif [ "$ESTADO" = "rechazado" ]; then
+              mv "$file" "rejected/$FECHA.json"
+              echo "❌ Rechazado: $FECHA"
+            fi
+          done
+
+      - name: Commit de cambios
+        run: |
+          git add approved/ rejected/
+          git commit -m "📥 Procesadas decisiones de preproducción" || echo "Sin cambios que commitear"
+          git push

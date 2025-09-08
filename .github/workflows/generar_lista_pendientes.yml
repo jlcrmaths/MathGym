@@ -1,0 +1,47 @@
+name: Generar lista de retos pendientes
+
+on:
+  push:
+    paths:
+      - 'almacen_retos/**.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generar_lista:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name 'Mathgym Bot'
+          git config --global user.email 'actions@github.com'
+
+      - name: Generar lista_pendientes.json
+        run: |
+          set -e
+          mkdir -p tmp_list
+          > lista_pendientes.json
+          echo "[]" > lista_pendientes.json
+
+          for file in almacen_retos/*.json; do
+            [ -e "$file" ] || continue
+            FECHA=$(jq -r '.fecha' "$file")
+            TITULO=$(jq -r '.titulo' "$file")
+            jq --arg fecha "$FECHA" --arg titulo "$TITULO" \
+               '. + [{"fecha":$fecha,"titulo":$titulo}]' lista_pendientes.json > tmp_list/out.json
+            mv tmp_list/out.json lista_pendientes.json
+          done
+
+          jq 'sort_by(.fecha)' lista_pendientes.json > tmp_list/sorted.json
+          mv tmp_list/sorted.json lista_pendientes.json
+
+      - name: Guardar cambios
+        run: |
+          git add lista_pendientes.json
+          git commit -m "🔄 Actualizada lista_pendientes.json" || echo "Sin cambios que commitear"
+          git push

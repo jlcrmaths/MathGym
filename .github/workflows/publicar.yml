@@ -1,0 +1,49 @@
+name: Publicar Reto Diario
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Todos los días a las 06:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  publicar_reto:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name 'Mathgym Bot'
+          git config --global user.email 'actions@github.com'
+
+      - name: Publicar reto más antiguo
+        run: |
+          mkdir -p retos_publicados
+          RETO=$(ls approved/*.json | sort | head -n 1)
+          [ -e "$RETO" ] || { echo "No hay retos aprobados para publicar."; exit 0; }
+
+          cp "$RETO" reto.json
+          FECHA=$(jq -r '.fecha' "$RETO")
+          TITULO=$(jq -r '.titulo' "$RETO")
+
+          mv "$RETO" "retos_publicados/$FECHA.json"
+
+          if [ -f lista_retos.json ]; then
+            jq --arg fecha "$FECHA" --arg titulo "$TITULO" \
+              '. + [{"fecha":$fecha,"titulo":$titulo}]' lista_retos.json > tmp.json
+            jq 'sort_by(.fecha)' tmp.json > lista_retos.json
+            rm tmp.json
+          else
+            echo "[{\"fecha\":\"$FECHA\",\"titulo\":\"$TITULO\"}]" > lista_retos.json
+          fi
+
+      - name: Commit de publicación
+        run: |
+          git add reto.json retos_publicados/ lista_retos.json
+          git commit -m "📢 Publicado reto del día: $FECHA" || echo "Sin cambios que commitear"
+          git push
+

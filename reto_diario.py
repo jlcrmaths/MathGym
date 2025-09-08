@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import json
 import os
+<<<<<<< HEAD
 from datetime import datetime, timedelta
 import firebase_admin
 from firebase_admin import credentials
@@ -31,6 +32,38 @@ def generar_un_reto(categoria, ruta_guardado):
     """Genera un único reto y lo guarda en la ruta especificada."""
     print(f"Generando para: {categoria}...")
     # Prompt ajustado para pedir una estructura más completa
+=======
+from datetime import datetime
+
+# Importamos la configuración local en lugar de leer secretos de GitHub
+try:
+    import config
+except ImportError:
+    print("❌ ERROR: No se encontró el archivo 'config.py'.")
+    print("Por favor, crea un archivo config.py y añade tu GEMINI_API_KEY dentro.")
+    exit()
+
+# --- CONFIGURACIÓN ---
+# Configuración de la API de Gemini desde el archivo local
+api_key = config.GEMINI_API_KEY
+genai.configure(api_key=api_key)
+
+# El modelo de IA que usaremos
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
+
+# Lista de categorías de retos que queremos generar
+CATEGORIAS = [
+    "lógica deductiva", 
+    "laboratorio virtual de trasvases", 
+    "criptoaritmética", 
+    "secuencia lógica para cruzar un río", 
+    "lógica lateral"
+]
+
+def generar_un_reto(categoria, ruta_guardado):
+    """Genera un único reto y lo guarda en la ruta especificada."""
+    print(f"Generando para: {categoria}...")
+>>>>>>> fe17e2c (🔄 Actualización completa del sistema MathGym: reto diario, histórico, preproducción y workflows)
     prompt = f"""
     Crea un reto original de '{categoria}'.
     Devuelve EXCLUSIVAMENTE un objeto JSON válido con la siguiente estructura:
@@ -49,11 +82,17 @@ def generar_un_reto(categoria, ruta_guardado):
     
     try:
         response = model.generate_content(prompt)
+<<<<<<< HEAD
         # Limpieza robusta del texto para asegurar que sea un JSON válido
         cleaned_text = response.text.strip().replace("```json", "").replace("```", "")
         reto_json = json.loads(cleaned_text)
         
         # Crear directorio si no existe
+=======
+        cleaned_text = response.text.strip().replace("```json", "").replace("```", "")
+        reto_json = json.loads(cleaned_text)
+        
+>>>>>>> fe17e2c (🔄 Actualización completa del sistema MathGym: reto diario, histórico, preproducción y workflows)
         os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
         
         with open(ruta_guardado, "w", encoding="utf-8") as f:
@@ -64,6 +103,7 @@ def generar_un_reto(categoria, ruta_guardado):
         print(f"❌ ERROR en '{categoria}': {e}")
         return False
 
+<<<<<<< HEAD
 def modo_lote():
     """Modo para generar múltiples retos y guardarlos en el almacén."""
     print("Iniciando generación de lote...")
@@ -85,3 +125,24 @@ if __name__ == "__main__":
         modo_lote()
     else:
         print("Modo no especificado. El script debe ejecutarse en modo 'bulk'.")
+=======
+def generar_lote():
+    """Genera múltiples retos y los guarda en el almacén."""
+    print("Iniciando generación de lote...")
+    # Puedes cambiar este número si quieres más o menos retos por categoría
+    retos_por_categoria = 5 
+    
+    for categoria_nombre in CATEGORIAS:
+        nombre_carpeta = categoria_nombre.replace(" ", "_").lower()
+        
+        for i in range(1, retos_por_categoria + 1):
+            # Usamos una marca de tiempo para asegurar nombres de archivo únicos
+            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+            ruta = f"almacen_retos/{nombre_carpeta}/reto_{timestamp}_{i}.json"
+            generar_un_reto(categoria_nombre, ruta)
+            
+    print("\n🎉 Proceso finalizado. La carpeta 'almacen_retos' está lista para ser subida a GitHub.")
+
+if __name__ == "__main__":
+    generar_lote()
+>>>>>>> fe17e2c (🔄 Actualización completa del sistema MathGym: reto diario, histórico, preproducción y workflows)

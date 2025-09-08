@@ -1,304 +1,216 @@
-/* =========================================================
-   MathGym — Hoja de estilos principal
-   ========================================================= */
-
-/* ---------- Variables ---------- */
 :root {
-    --bg-grad-1: #0f1724;                 /* Fondo base más limpio */
-    --bg-grad-2: #1e2a3a;                 /* Degradado sutil */
-    --azul-espacio-profundo: #1e2a3a;     /* Conservamos tu paleta */
-    --azul-pizarra: #243447;              /* Un poco más legible que #2c3e50 */
-    --blanco-nube: #f5f7fa;               /* Blanco cálido para contraste */
-    --gris-300: #cfd8e3;
-    --gris-500: #9aa4b2;
-    --gris-700: #5b6470;
-  
-    --amarillo-cibernetico: #f6c90e;      /* Amarillo vivo */
-    --turquesa-vibrante: #1abc9c;
-  
-    --ring: #f6c90e;
-  
-    --font-titulos: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    --font-textos: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  
-    --radius-lg: 16px;
-    --radius-md: 12px;
-    --radius-sm: 8px;
-  
-    --shadow-1: 0 8px 24px rgba(0,0,0,0.25);
-    --shadow-2: 0 14px 40px rgba(0,0,0,0.35);
-  
-    --container: 920px;
-  
-    /* Escala de espacios */
-    --space-1: .25rem;
-    --space-2: .5rem;
-    --space-3: .75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-  }
-  
-  /* ---------- Base ---------- */
-  * { box-sizing: border-box; }
-  html, body { height: 100%; }
-  body {
-    margin: 0;
-    color: var(--blanco-nube);
-    font-family: var(--font-textos);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  
-    /* Fondo con degradado sutil y textura */
-    background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(26,188,156,0.12), transparent 60%),
-      radial-gradient(900px 600px at -10% 90%, rgba(246,201,14,0.12), transparent 60%),
-      linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--space-6);
-  }
-  
-  h1, h2, h3 { font-family: var(--font-titulos); margin: 0 0 .5rem 0; }
-  a { color: var(--turquesa-vibrante); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  img { max-width: 100%; display: block; }
-  
-  /* ---------- Cabecera (logo + título) ---------- */
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
-  }
-  .logo-mascota {
-    width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
-    background: rgba(255,255,255,0.06);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-    padding: 4px;
-  }
-  .logo-container h1 {
-    font-size: clamp(1.8rem, 2.6vw, 2.6rem);
-    letter-spacing: .5px;
-    color: var(--amarillo-cibernetico);
-    text-shadow: 0 2px 16px rgba(246,201,14,0.22);
-  }
-  
-  /* ---------- Contenedor principal ---------- */
-  #contenedor-juego,
-  .contenedor-preprod,
-  .contenedor-archivo {
-    width: 100%;
-    max-width: var(--container);
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: var(--radius-lg);
-    padding: clamp(1rem, 2.4vw, 2rem);
-    box-shadow: var(--shadow-1);
-  }
-  header { text-align: center; }
-  header h2 {
-    color: var(--blanco-nube);
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-    margin-bottom: .25rem;
-  }
-  #objetivo-reto {
-    color: var(--gris-300);
-    margin: 0;
-    font-size: clamp(.95rem, 1.6vw, 1.05rem);
-  }
-  
-  /* ---------- Accesibilidad ---------- */
-  .visually-hidden {
-    position: absolute !important;
-    height: 1px; width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
-  }
-  a:focus, .boton-regenerar:focus, .estrellas span:focus {
-    outline: 2px solid var(--ring);
-    outline-offset: 3px;
-    border-radius: 6px;
-  }
-  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
-  
-  /* ---------- Hero del entrenador ---------- */
-  .coach-hero {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: var(--space-6);
-    margin: var(--space-6) 0 var(--space-4);
-    position: relative;
-  }
-  .coach {
-    position: relative; margin: 0; z-index: 1;
-  }
-  .coach__avatar {
-    width: 168px; height: 168px; border-radius: 50%; object-fit: cover;
-    background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(0,0,0,0.25));
-    box-shadow:
-      0 10px 30px rgba(0,0,0,0.35),
-      0 0 0 4px rgba(255,255,255,0.06),
-      0 0 0 8px rgba(26,188,156,0.18);
-    filter: none !important;
-    transform: translateZ(0);
-    animation: coach-bob 7s ease-in-out infinite;
-  }
-  .coach__badge {
-    position: absolute; right: -8px; bottom: -8px;
-    background: var(--turquesa-vibrante); color: white;
-    border-radius: 999px; padding: 6px 8px; font-size: 1rem;
-    border: 2px solid rgba(255,255,255,0.15);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  }
-  .coach__bubble {
-    position: absolute;
-    left: -14px; top: -14px; transform: translate(-100%, 0);
-    max-width: 280px;
-    background: #111826; /* más oscuro para destacar */
-    color: var(--blanco-nube);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius-md);
-    padding: 10px 12px;
-    box-shadow: var(--shadow-2);
-    font-size: .98rem;
-  }
-  .coach__bubble::after {
-    content: "";
-    position: absolute; right: -8px; bottom: 18px;
-    border: 8px solid transparent;
-    border-left-color: #111826;
-  }
-  .coach__bubble strong {
-    font-family: var(--font-titulos);
-    color: var(--amarillo-cibernetico);
-    font-size: .98rem; display: block; margin-bottom: 4px;
-  }
-  /* Animación sutil */
-  @keyframes coach-bob {
-    0%,100% { transform: translateY(0) }
-    50% { transform: translateY(-4px) }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .coach__avatar { animation: none; }
-  }
-  .coach:hover .coach__avatar {
-    transition: transform .25s ease, box-shadow .25s ease;
-    transform: translateY(-2px);
-    box-shadow:
-      0 18px 44px rgba(0,0,0,0.45),
-      0 0 0 4px rgba(255,255,255,0.08),
-      0 0 0 10px rgba(26,188,156,0.22);
-  }
-  
-  /* ---------- Icono del reto ---------- */
-  .imagen-container { margin: var(--space-6) 0 var(--space-4); text-align: center; }
-  #imagen-reto {
-    width: 104px;
-    height: 104px;
-    max-width: 104px;
-    object-fit: contain;
-    filter: invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.25));
-  }
-  
-  /* ---------- Info (visitas / valoración) ---------- */
-  #info-reto {
-    display: flex; justify-content: space-between; align-items: center;
-    gap: var(--space-4);
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius-md);
-    color: var(--gris-300);
-  }
-  
-  /* ---------- Laboratorio placeholder ---------- */
-  #laboratorio-placeholder {
-    padding: var(--space-8);
-    border-radius: var(--radius-md);
-    text-align: center;
-    color: var(--gris-500);
-    border: 2px dashed rgba(255,255,255,0.15);
-  }
-  
-  /* ---------- Valoración ---------- */
-  #sistema-valoracion { margin-top: var(--space-8); text-align: center; }
-  #sistema-valoracion p { margin-top: 0; color: var(--gris-300); }
-  .estrellas {
-    font-size: clamp(2rem, 3.6vw, 2.6rem);
-    cursor: pointer; color: var(--blanco-nube);
-    user-select: none;
-  }
-  .estrellas span {
-    display: inline-block;
-    transition: color .2s ease, transform .12s ease, filter .2s ease;
-    padding: 0 .05em;
-  }
-  .estrellas span:hover {
-    color: var(--amarillo-cibernetico);
-    filter: drop-shadow(0 2px 10px rgba(246,201,14,0.25));
-  }
-  .estrellas span:active { transform: scale(0.95); }
-  
-  /* ---------- Botones / Enlaces de acción ---------- */
-  .boton-regenerar {
-    background-color: #e67e22; border: none; color: white;
-    padding: 10px 14px; border-radius: var(--radius-sm); cursor: pointer;
-    font-weight: 700; font-family: var(--font-titulos);
-    transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease;
-    box-shadow: 0 6px 16px rgba(230,126,34,0.22);
-  }
-  .boton-regenerar:hover { background-color: #d35400; }
-  .boton-regenerar:active { transform: translateY(1px); }
-  .boton-regenerar:disabled { background-color: #7f8c8d; cursor: not-allowed; box-shadow: none; }
-  
-  /* ---------- Compartir ---------- */
-  .sharing-container {
-    margin-top: var(--space-8); text-align: center; padding-top: var(--space-4);
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-  .sharing-container a {
-    background-color: var(--turquesa-vibrante);
-    color: #061317;
-    padding: 10px 15px;
-    border-radius: var(--radius-sm);
-    margin: 0 6px;
-    font-weight: 800;
-    display: inline-block;
-    box-shadow: 0 6px 16px rgba(26,188,156,0.22);
-    transition: background-color .2s ease, transform .12s ease, box-shadow .2s ease;
-  }
-  .sharing-container a:hover { background-color: #16a085; transform: translateY(-1px); }
-  .sharing-container a:active { transform: translateY(0); }
-  .sharing-container a:focus {
-    box-shadow: 0 0 0 3px rgba(246,201,14,0.55), 0 6px 16px rgba(26,188,156,0.22);
-    outline: none;
-  }
-  
-  /* ---------- Lista archivo (si se usa en otras vistas) ---------- */
-  .item-archivo {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 14px;
-    margin-bottom: 10px;
-    border-radius: var(--radius-md);
-    display: flex; justify-content: space-between; align-items: center; gap: 10px;
-  }
-  .item-archivo .info small { color: var(--gris-500); }
-  
-  /* ---------- Responsive ---------- */
-  @media (max-width: 860px) {
-    body { padding: var(--space-4); }
-    .coach-hero { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-    .coach__bubble { position: static; transform: none; margin-bottom: var(--space-4); }
-  }
+  --bg: #f7f7fb;
+  --fg: #222;
+  --muted: #666;
+  --brand: #6c5ce7;
+  --brand-2: #a29bfe;
+  --border: #ddd;
+  --card: #fff;
+  --accent: #00c2ff;
+  --success: #2ecc71;
+  --warning: #e67e22;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Lato', sans-serif;
+}
+
+/* Cabecera */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  color: #fff;
+}
+.logo-container .logo-mascota {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+.logo-container h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+/* Contenedor principal */
+.contenedor-reto {
+  max-width: 860px;
+  margin: 20px auto 40px;
+  padding: 0 16px;
+}
+
+/* Deceerre protagonista */
+.deceerre-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 860px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+  animation: aparecer 0.5s ease-out;
+}
+.deceerre-container img {
+  width: 84px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.deceerre-container img.animar {
+  transform: scale(1.08) rotate(-3deg);
+}
+.deceerre-bubble {
+  background: var(--card);
+  border: 2px solid var(--fg);
+  border-radius: 12px;
+  padding: 10px 14px;
+  max-width: 360px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.deceerre-bubble strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.deceerre-bubble::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 18px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent var(--fg) transparent transparent;
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reto: cabecera */
+.reto-header {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+.reto-header h2 {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-size: 1.6rem;
+}
+.icono-reto {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* Reto: objetivo */
+.reto-objetivo {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 12px;
+}
+.reto-objetivo h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+}
+
+/* Métricas */
+.reto-metricas {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* Valoración */
+.reto-valoracion {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 12px;
+}
+.reto-valoracion h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+}
+.estrellas-container {
+  display: inline-block;
+}
+.estrellas {
+  display: inline-flex;
+  gap: 6px;
+  font-size: 28px;
+  user-select: none;
+}
+.estrellas span {
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.2s ease;
+  outline: none;
+}
+.estrellas span:focus {
+  transform: scale(1.15);
+  color: var(--accent);
+}
+
+/* Compartir */
+.reto-compartir {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 12px;
+}
+.botones-compartir {
+  display: flex;
+  gap: 10px;
+}
+.botones-compartir a {
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.botones-compartir a:hover { background: var(--brand-2); }
+.botones-compartir a:active { transform: translateY(1px); }
+
+/* Navegación secundaria */
+.navegacion-secundaria {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.navegacion-secundaria a {
+  color: var(--brand);
+  text-decoration: none;
+}
+.navegacion-secundaria a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .icono-reto { width: 52px; height: 52px; }
+  .deceerre-container img { width: 72px; }
+}
+
   
