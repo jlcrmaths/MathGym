@@ -1,84 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MathGym — Reto del día</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MathGym: un reto corto cada día para entrenar tu razonamiento.">
-  <meta property="og:title" content="MathGym — Reto del día">
-  <meta property="og:description" content="Un reto corto cada día para entrenar tu razonamiento.">
-  <meta property="og:url" content="https://mathgym.es/">
-  <meta property="og:image" content="https://mathgym.es/assets/og-mathgym.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Cabecera -->
-  <div class="logo-container">
-    <img src="assets/deceerre-feliz.png" alt="Deceerre" class="logo-mascota">
+  <header class="header">
+    <img src="assets/deceerre-feliz.png" alt="Deceerre" class="mascota" />
     <h1>MathGym</h1>
-  </div>
+  </header>
 
-  <!-- Deceerre protagonista -->
-  <div class="deceerre-container">
-    <img id="deceerre-img" src="assets/deceerre-feliz.png" alt="Deceerre, tu entrenador" />
-    <div id="deceerre-bubble" class="deceerre-bubble">
-      <strong>¡Hola!</strong>
-      <span>Prepárate para el reto de hoy.</span>
-    </div>
-  </div>
-
-  <!-- Contenido principal del reto -->
-  <main class="contenedor-reto">
-    <section class="reto-header">
-      <h2 id="titulo-reto">Reto del día</h2>
-      <img id="imagen-reto" src="assets/icono-generico.svg" alt="Icono del reto" class="icono-reto">
+  <main class="contenedor">
+    <section class="reto">
+      <h2>¿Cuántos triángulos ves?</h2>
+      <p class="objetivo">Cuenta todos los triángulos en la figura y justifica tu respuesta.</p>
+      <img src="assets/triangulos-ejemplo.svg" alt="Figura del reto"amiento aquí..."></textarea>
     </section>
 
-    <section class="reto-objetivo">
-      <h3>Objetivo</h3>
-      <p id="objetivo-reto">Cargando reto...</p>
-    </section>
-
-    <section class="reto-metricas">
-      <div id="contador-visitas" aria-live="polite">👁️ --</div>
-      <div id="valoracion-reto" aria-live="polite">⭐ --/5</div>
-    </section>
-
-    <section class="reto-valoracion">
+    <section class="valoracion">
       <h3>¿Qué te ha parecido?</h3>
-      <div id="sistema-valoracion" class="estrellas-container">
-        <div class="estrellas" aria-label="Valorar reto">
-          <span data-valor="1" role="button" tabindex="0" aria-label="Valorar 1 de 5">☆</span>
-          <span data-valor="2" role="button" tabindex="0" aria-label="Valorar 2 de 5">☆</span>
-          <span data-valor="3" role="button" tabindex="0" aria-label="Valorar 3 de 5">☆</span>
-          <span data-valor="4" role="button" tabindex="0" aria-label="Valorar 4 de 5">☆</span>
-          <span data-valor="5" role="button" tabindex="0" aria-label="Valorar 5 de 5">☆</span>
-        </div>
+      <div class="estrellas">
+        <span data-valor="1">☆</span>
+        <span data-valor="2">☆</span>
+        <span data-valor="3">☆</span>
+        <span data-valor="4">☆</span>
+        <span data-valor="5">☆</span>
       </div>
     </section>
 
-    <section class="reto-compartir">
+    <section class="compartir">
       <h3>Compártelo</h3>
-      <div class="botones-compartir">
-        <a id="share-twitter" href="#" target="_blank" rel="noopener">Compartir en X</a>
-        <a id="share-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
+      <a href="#" class="btn twitter">Compartir en X</a>
+      <a href="#" class="btn whatsapp">Compartir en WhatsApp</a>
     </section>
-
-    <nav class="navegacion-secundaria">
-      <a href="archivo.html">🗂️ Archivo de Retos</a>
-      <a href="preproduccion.html">🔬 Preproducción</a>
-    </nav>
   </main>
-
-  <!-- Firebase SDKs (si usas Firestore) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-  <!-- Lógica principal -->
-  <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
